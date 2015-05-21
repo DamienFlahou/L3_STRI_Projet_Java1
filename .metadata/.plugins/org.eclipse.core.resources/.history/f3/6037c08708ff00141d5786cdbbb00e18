@@ -1,0 +1,105 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JList;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class ApplicationWindows {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ApplicationWindows window = new ApplicationWindows();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public ApplicationWindows() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 663, 336);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
+		panel.setLayout(null);
+		
+		JList list_2 = new JList();
+		list_2.setBounds(10, 33, 135, 180);
+		panel.add(list_2);
+		
+		JList list = new JList();
+		list.setBounds(144, 33, 135, 180);
+		panel.add(list);
+		
+		JList list_1 = new JList();
+		list_1.setBounds(277, 33, 135, 180);
+		panel.add(list_1);
+		
+		JList list_3 = new JList();
+		list_3.setBounds(409, 33, 135, 180);
+		panel.add(list_3);
+		
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnAjouter.setBounds(48, 224, 89, 23);
+		panel.add(btnAjouter);
+		
+		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.setBounds(246, 224, 89, 23);
+		panel.add(btnSupprimer);
+		
+		JButton btnMiseJour = new JButton("Mise \u00E0 jour");
+		btnMiseJour.setBounds(345, 224, 89, 23);
+		panel.add(btnMiseJour);
+		
+		JButton btnActiver = new JButton("Activer");
+		btnActiver.setBounds(444, 224, 89, 23);
+		panel.add(btnActiver);
+		
+		JButton btnDsactiver = new JButton("D\u00E9sactiver");
+		btnDsactiver.setBounds(543, 224, 89, 23);
+		panel.add(btnDsactiver);
+		
+		JButton btnModifier = new JButton("Modifier");
+		btnModifier.setBounds(147, 224, 89, 23);
+		panel.add(btnModifier);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_1, null);
+	}
+}
