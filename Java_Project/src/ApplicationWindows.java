@@ -2,48 +2,30 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JList;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JSeparator;
+
 import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class ApplicationWindows {
-
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ApplicationWindows window = new ApplicationWindows();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+public class ApplicationWindows extends JFrame{
+	
 	public ApplicationWindows() {
 		initialize();
 	}
@@ -52,12 +34,11 @@ public class ApplicationWindows {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 663, 336);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 663, 336);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel Reseau_physique = new JPanel();
 		tabbedPane.addTab("R\u00E9seau physique", null, Reseau_physique, null);
