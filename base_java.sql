@@ -167,7 +167,50 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 SET foreign_key_checks = 0;
 
-INSERT INTO 
+-- LOCAUX
+INSERT INTO Local VALUES (1, 'Local1');
+INSERT INTO Local VALUES (2, 'Local2');
 
+-- ROUTEURS
+INSERT INTO Routeur VALUES (1, '', 'Routeur 1', '1');
+INSERT INTO Routeur VALUES (2, '', 'Routeur 2', '2');
+
+-- SWITCH
+INSERT INTO Switch VALUES (1, 1, '', 'Switch1',1);
+INSERT INTO Switch VALUES (2, 2, '', 'Switch2',2);
+
+-- SALLES
+INSERT INTO Salle VALUES (1, 1, 1, 1, 'Salle 1.1');
+INSERT INTO Salle VALUES (2, 1, 1, 1, 'Salle 1.2');
+INSERT INTO Salle VALUES (3, 2, 2, 2, 'Salle 2.1');
+INSERT INTO Salle VALUES (4, 2, 2, 2, 'Salle 2.2');
+
+-- ORDINATEURS
+INSERT INTO Ordinateur VALUES (1, 1, 1, 'Ordi1');
+INSERT INTO Ordinateur VALUES (2, 1, 1, 'Ordi2');
+INSERT INTO Ordinateur VALUES (3, 2, 1, 'Ordi3');
+INSERT INTO Ordinateur VALUES (4, 2, 1, 'Ordi4');
+INSERT INTO Ordinateur VALUES (5, 3, 2, 'Ordi5');
+INSERT INTO Ordinateur VALUES (6, 3, 2, 'Ordi6');
+INSERT INTO Ordinateur VALUES (7, 4, 2, 'Ordi7');
+INSERT INTO Ordinateur VALUES (8, 4, 2, 'Ordi8');
+
+-- CARTES RESEAUX
+INSERT INTO Carte_reseau VALUES (1, 1, 1, '11:01:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (2, 1, 1, '11:01:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (3, 2, 1, '11:02:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (4, 2, 1, '11:02:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (5, 3, 1, '12:03:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (6, 3, 1, '12:03:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (7, 4, 1, '12:04:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (8, 4, 1, '12:04:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (9, 5, 2, '21:05:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (10, 5, 2, '21:05:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (11, 6, 2, '21:06:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (12, 6, 2, '21:06:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (13, 7, 2, '22:07:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (14, 7, 2, '22:07:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (15, 8, 2, '22:08:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (16, 8, 2, '22:08:43:00:00:02');
 
 SET foreign_key_checks = 1;
