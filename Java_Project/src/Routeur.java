@@ -20,12 +20,20 @@ public class Routeur {
 		this.listeSwitch.add(new Switch(nomSwitch));
 	}
 	
+	public void AjouterSwitch(Switch _switch) {
+		this.listeSwitch.add(_switch);
+	}
+	
 	public void AjouterSalle(String nomSalle) {
 		this.listeSalle.add(new Salle(nomSalle));
 	}
 	
 	public void AjouterCarteReseau(String nomCarteReseau) {
 		this.listeCarteReseau.add(new CarteReseau(nomCarteReseau));
+	}
+	
+	public void AjouterCarteReseau(CarteReseau carteReseau) {
+		this.listeCarteReseau.add(carteReseau);
 	}
 
 	public String getNomRouteur() {

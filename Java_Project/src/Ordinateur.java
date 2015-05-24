@@ -13,6 +13,10 @@ public class Ordinateur {
 	public void AjouterCarteReseau(String adresseMac) {
 		this.listeCarteReseau.add(new CarteReseau(adresseMac));
 	}
+	
+	public void AjouterCarteReseau(CarteReseau carteReseau) {
+		this.listeCarteReseau.add(carteReseau);
+	}
 
 	public String getNomOrdinateur() {
 		return nomOrdinateur;

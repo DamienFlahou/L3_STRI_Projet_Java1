@@ -18,6 +18,10 @@ public class Switch {
 	public void AjouterOrdinateur(String nomOrdinateur) {
 		this.listeOrdinateur.add(new Ordinateur(nomOrdinateur));
 	}
+	
+	public void AjouterOrdinateur(Ordinateur ordinateur) {
+		this.listeOrdinateur.add(ordinateur);
+	}
 
 	public String getNomSwitch() {
 		return nomSwitch;
