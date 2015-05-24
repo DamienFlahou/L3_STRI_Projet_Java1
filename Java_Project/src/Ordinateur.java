@@ -34,4 +34,8 @@ public class Ordinateur {
 		this.listeCarteReseau = listeCarteReseau;
 	}
 	
+	public String toString(){
+		return nomOrdinateur;
+	}
+	
 }

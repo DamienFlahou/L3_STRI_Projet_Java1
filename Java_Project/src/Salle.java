@@ -24,6 +24,10 @@ public class Salle {
 	public void AjouterOrdinateur(String nomOrdinateur) {
 		this.listeOrdinateur.add(new Ordinateur(nomOrdinateur));
 	}
+	
+	public void AjouterOrdinateur(Ordinateur ordinateur) {
+		this.listeOrdinateur.add(ordinateur);
+	}
 
 	public String getNomSalle() {
 		return nomSalle;
@@ -57,5 +61,8 @@ public class Salle {
 		this.listeOrdinateur = listeOrdinateur;
 	}
 	
+	public String toString(){
+		return nomSalle;
+	}
 	
 }

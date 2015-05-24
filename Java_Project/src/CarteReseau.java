@@ -13,5 +13,9 @@ public class CarteReseau {
 	public void setAdresse_mac(String adresseMac) {
 		this.adresseMac = adresseMac;
 	}
+	
+	public String toString(){
+		return adresseMac;
+	}
 
 }

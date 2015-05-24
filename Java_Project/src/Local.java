@@ -18,6 +18,10 @@ public class Local {
 	public void AjouterSalle(String nomSalle) {
 		this.listeSalle.add(new Salle(nomSalle));
 	}
+	
+	public void AjouterSalle(Salle salle) {
+		this.listeSalle.add(salle);
+	}
 
 	public void AjouterSwitch(String nomSwitch) {
 		this.listeSwitch.add(new Switch(nomSwitch));
@@ -53,6 +57,10 @@ public class Local {
 
 	public void setListeSalle(ArrayList<Salle> listeSalle) {
 		this.listeSalle = listeSalle;
+	}
+	
+	public String toString(){
+		return this.nomLocal;
 	}
 	
 }
