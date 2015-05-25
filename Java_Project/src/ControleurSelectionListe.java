@@ -62,9 +62,7 @@ public class ControleurSelectionListe implements MouseListener{
 		
 		switch(numeroListe){
 		case SLocal :
-			if(selectionPrecedente != fenetre.getList_locaux().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
 				changerBoutonsPhysique("Local");
-				selectionPrecedente = fenetre.getList_locaux().getSelectedIndex();
 				
 				//remplit les autres listes en fonction de l'élément
 				Local local = (Local) fenetre.getListeLocaux().get(fenetre.getList_locaux().getSelectedIndex());
@@ -85,13 +83,11 @@ public class ControleurSelectionListe implements MouseListener{
 					}
 					
 				}
-			}
+			
 			break;
 		case SSalle :
-			if(selectionPrecedente != fenetre.getList_salles().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
 				
 				changerBoutonsPhysique("Salle");
-				selectionPrecedente = fenetre.getList_salles().getSelectedIndex();
 				
 				//remplit les autres listes en fonction de l'élément
 				Salle salle = (Salle) fenetre.getListeSalles().get(fenetre.getList_salles().getSelectedIndex());
@@ -106,15 +102,12 @@ public class ControleurSelectionListe implements MouseListener{
 						fenetre.getListeCarteReseaux().addElement(carte);
 					}
 				}
-			}
+			
 			break;
 		case SOrdinateurPhysique :
-			if(selectionPrecedente != fenetre.getList_ordinateurs_physique().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
 					
 				changerBoutonsPhysique("Ordinateur");
-	
-				selectionPrecedente = fenetre.getList_ordinateurs_physique().getSelectedIndex();
-				
+					
 				//remplit les autres listes en fonction de l'élément
 				Ordinateur ordinateur = (Ordinateur) fenetre.getListeOrdinateurs().get(fenetre.getList_ordinateurs_physique().getSelectedIndex());
 				
@@ -123,15 +116,13 @@ public class ControleurSelectionListe implements MouseListener{
 				for(CarteReseau carte : ordinateur.getListeCarteReseau()){
 					fenetre.getListeCarteReseaux().addElement(carte);
 				}
-			}
+			
 			break;
 		case SCarteReseauPhysique :
 			changerBoutonsPhysique("Carte Res");
 			break;
 		case SRouteur :
-			if(selectionPrecedente != fenetre.getList_routeurs().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
 				changerBoutonsLogique("Routeur");
-				selectionPrecedente = fenetre.getList_routeurs().getSelectedIndex();
 				
 				//remplit les autres listes en fonction de l'élément
 				Routeur routeur = (Routeur) fenetre.getListeRouteurs().get(fenetre.getList_routeurs().getSelectedIndex());
@@ -143,20 +134,19 @@ public class ControleurSelectionListe implements MouseListener{
 				for(Switch switchR : listeSwitchs){
 					fenetre.getListeSwitchs().addElement(switchR);
 					
-					for(Ordinateur ordinateur : switchR.getListeOrdinateur()){
-						fenetre.getListeOrdinateurs2().addElement(ordinateur);
+					for(Ordinateur ordinateur0 : switchR.getListeOrdinateur()){
+						fenetre.getListeOrdinateurs2().addElement(ordinateur0);
 						
-						for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+						for(CarteReseau carte : ordinateur0.getListeCarteReseau()){
 							fenetre.getListeCarteReseaux2().addElement(carte);
 						}
 					}
 					
 				}
-			}
+			
 			break;
 		case SSwitch :
 				changerBoutonsLogique("Switch");
-				selectionPrecedente = fenetre.getList_switchs().getSelectedIndex();
 				
 				//remplit les autres listes en fonction de l'élément
 				Switch switchR = (Switch) fenetre.getListeSwitchs().get(fenetre.getList_switchs().getSelectedIndex());
@@ -164,29 +154,27 @@ public class ControleurSelectionListe implements MouseListener{
 				fenetre.getListeOrdinateurs2().clear();
 				fenetre.getListeCarteReseaux2().clear();
 				
-				for(Ordinateur ordinateur : switchR.getListeOrdinateur()){
-					fenetre.getListeOrdinateurs2().addElement(ordinateur);
+				for(Ordinateur ordinateur1 : switchR.getListeOrdinateur()){
+					fenetre.getListeOrdinateurs2().addElement(ordinateur1);
 					
-					for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+					for(CarteReseau carte : ordinateur1.getListeCarteReseau()){
 						fenetre.getListeCarteReseaux2().addElement(carte);
 					}
 				}
 			
 			break;
 		case SOrdinateurLogique :
-			if(selectionPrecedente != fenetre.getList_ordinateurs_logique().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
 				changerBoutonsLogique("Ordinateur");
-				selectionPrecedente = fenetre.getList_ordinateurs_logique().getSelectedIndex();
 				
 				//remplit les autres listes en fonction de l'élément
-				Ordinateur ordinateur = (Ordinateur) fenetre.getListeOrdinateurs2().get(fenetre.getList_ordinateurs_logique().getSelectedIndex());
+				Ordinateur ordinateur2 = (Ordinateur) fenetre.getListeOrdinateurs2().get(fenetre.getList_ordinateurs_logique().getSelectedIndex());
 				
 				fenetre.getListeCarteReseaux2().clear();
 				
-				for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+				for(CarteReseau carte : ordinateur2.getListeCarteReseau()){
 					fenetre.getListeCarteReseaux2().addElement(carte);
 				}
-			}
+			
 			break;
 		case SCarteReseauLogique :
 			changerBoutonsLogique("Carte Res");
