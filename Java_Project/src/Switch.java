@@ -47,4 +47,7 @@ public class Switch {
 		this.listeOrdinateur = listeOrdinateur;
 	}
 	
+	public String toString(){
+		return nomSwitch;
+	}
 }

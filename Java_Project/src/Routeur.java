@@ -44,14 +44,6 @@ public class Routeur {
 		this.nomRouteur = nomRouteur;
 	}
 
-	public ArrayList<Local> getListeLocal() {
-		return listeLocal;
-	}
-
-	public void setListeLocal(ArrayList<Local> listeLocal) {
-		this.listeLocal = listeLocal;
-	}
-
 	public ArrayList<Switch> getListeSwitch() {
 		return listeSwitch;
 	}
@@ -74,6 +66,10 @@ public class Routeur {
 
 	public void setListeCarteReseau(ArrayList<CarteReseau> listeCarteReseau) {
 		this.listeCarteReseau = listeCarteReseau;
+	}
+	
+	public String toString(){
+		return nomRouteur;
 	}
 	
 }

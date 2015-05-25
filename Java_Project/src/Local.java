@@ -59,4 +59,8 @@ public class Local {
 		this.listeSalle = listeSalle;
 	}
 	
+	public String toString(){
+		return this.nomLocal;
+	}
+	
 }

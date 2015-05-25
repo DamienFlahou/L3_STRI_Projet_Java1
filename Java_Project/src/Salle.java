@@ -61,5 +61,8 @@ public class Salle {
 		this.listeOrdinateur = listeOrdinateur;
 	}
 	
+	public String toString(){
+		return nomSalle;
+	}
 	
 }
