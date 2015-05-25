@@ -15,8 +15,6 @@ public class Main {
 			throw e;
 		}
 		
-		
-		
 		ApplicationWindows window = new ApplicationWindows(bdd);
 		window.setVisible(true);
 		

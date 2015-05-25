@@ -1,38 +1,43 @@
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.border.Border;
 
 
-public class AjouterLocal {
+public class AjouterLocal extends JFrame implements MouseListener{
 
-	private JFrame frmAjouterLocal;
 	private JTextField textField_nom;
+	
+	private JButton btnValider;
+	private JButton btnAnnuler;
+	
+	private static final int BValider = 2;
+	private static final int BAnnuler = 3;
+	
+	private ApplicationWindows applicationPrincipale;
+	
+	public JTextField getTextField_nom() {
+		return textField_nom;
+	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AjouterLocal window = new AjouterLocal();
-					window.frmAjouterLocal.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public ApplicationWindows getApplicationPrincipale() {
+		return applicationPrincipale;
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public AjouterLocal() {
+	public AjouterLocal(ApplicationWindows _fenetre) {
+		applicationPrincipale = _fenetre;
 		initialize();
 	}
 
@@ -40,50 +45,63 @@ public class AjouterLocal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmAjouterLocal = new JFrame();
-		frmAjouterLocal.setTitle("Ajouter local");
-		frmAjouterLocal.setBounds(100, 100, 383, 267);
-		frmAjouterLocal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAjouterLocal.getContentPane().setLayout(null);
+		
+		this.setTitle("Ajouter local");
+		this.setBounds(60, 60, 372, 140);
+		this.setLocationRelativeTo(applicationPrincipale);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.getContentPane().setLayout(null);
+		this.setResizable(false);
 		
 		JLabel lblNom = new JLabel("Nom");
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNom.setBounds(35, 34, 73, 25);
-		frmAjouterLocal.getContentPane().add(lblNom);
+		lblNom.setBounds(12, 12, 73, 25);
+		this.getContentPane().add(lblNom);
 		
 		textField_nom = new JTextField();
-		textField_nom.setBounds(118, 36, 221, 19);
-		frmAjouterLocal.getContentPane().add(textField_nom);
+		textField_nom.setBounds(103, 15, 221, 19);
+		this.getContentPane().add(textField_nom);
 		textField_nom.setColumns(10);
 		
-		JButton btnAvanc = new JButton("Avanc\u00E9");
-		btnAvanc.setBounds(35, 70, 89, 23);
-		frmAjouterLocal.getContentPane().add(btnAvanc);
+		btnValider = new JButton("Valider");
+		btnValider.setBounds(124, 64, 89, 23);
+		this.getContentPane().add(btnValider);
 		
-		JLabel lblRouteur = new JLabel("Routeur");
-		lblRouteur.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRouteur.setBounds(35, 104, 73, 25);
-		frmAjouterLocal.getContentPane().add(lblRouteur);
+		btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setBounds(235, 64, 89, 23);
+		this.getContentPane().add(btnAnnuler);
 		
-		JComboBox comboBox_routeur = new JComboBox();
-		comboBox_routeur.setBounds(118, 104, 221, 19);
-		frmAjouterLocal.getContentPane().add(comboBox_routeur);
+		btnValider.addMouseListener(new ControleurAjouterLocal(this, BValider));
+		btnAnnuler.addMouseListener(new ControleurAjouterLocal(this, BAnnuler));
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
 		
-		JLabel lblNewLabel = new JLabel("Switch");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(35, 140, 73, 25);
-		frmAjouterLocal.getContentPane().add(lblNewLabel);
 		
-		JComboBox comboBox_switch = new JComboBox();
-		comboBox_switch.setBounds(118, 144, 221, 19);
-		frmAjouterLocal.getContentPane().add(comboBox_switch);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
-		JButton btnValider = new JButton("Valider");
-		btnValider.setBounds(265, 196, 89, 23);
-		frmAjouterLocal.getContentPane().add(btnValider);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setBounds(141, 196, 89, 23);
-		frmAjouterLocal.getContentPane().add(btnAnnuler);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
