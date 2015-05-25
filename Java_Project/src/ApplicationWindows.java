@@ -29,7 +29,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 
-public class ApplicationWindows extends JFrame implements ListSelectionListener, MouseListener{
+public class ApplicationWindows extends JFrame implements MouseListener{
 	
 	public static final int SLocal = 1;
 	public static final int SSalle = 2;
@@ -214,10 +214,10 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 
 		
 		//Ajoute List Selection listener sur les listes pour savoir quel type d'ajout ou de modification il faudra faire
-		list_locaux.addListSelectionListener(new ControleurSelectionListe(this, SLocal));
-		list_salles.addListSelectionListener(new ControleurSelectionListe(this, SSalle));
-		list_ordinateurs_physique.addListSelectionListener(new ControleurSelectionListe(this, SOrdinateurPhysique));
-		list_cartes_reseaux.addListSelectionListener(new ControleurSelectionListe(this, SCarteReseauPhysique));
+		list_locaux.addMouseListener(new ControleurSelectionListe(this, SLocal));
+		list_salles.addMouseListener(new ControleurSelectionListe(this, SSalle));
+		list_ordinateurs_physique.addMouseListener(new ControleurSelectionListe(this, SOrdinateurPhysique));
+		list_cartes_reseaux.addMouseListener(new ControleurSelectionListe(this, SCarteReseauPhysique));
 		
 		btnAjouter = new JButton("Ajouter");
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -311,10 +311,10 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		Reseau_logique.add(list_cartes_reseaux_logique);
 		
 		//Ajoute List Selection listener sur les listes pour savoir quel type d'ajout ou de modification il faudra faire
-		list_routeurs.addListSelectionListener(new ControleurSelectionListe(this, SRouteur));
-		list_switchs.addListSelectionListener(new ControleurSelectionListe(this, SSwitch));
-		list_ordinateurs_logique.addListSelectionListener(new ControleurSelectionListe(this, SOrdinateurLogique));
-		list_cartes_reseaux_logique.addListSelectionListener(new ControleurSelectionListe(this, SCarteReseauLogique));
+		list_routeurs.addMouseListener(new ControleurSelectionListe(this, SRouteur));
+		list_switchs.addMouseListener(new ControleurSelectionListe(this, SSwitch));
+		list_ordinateurs_logique.addMouseListener(new ControleurSelectionListe(this, SOrdinateurLogique));
+		list_cartes_reseaux_logique.addMouseListener(new ControleurSelectionListe(this, SCarteReseauLogique));
 		
 		btnAjouter_1 = new JButton("Ajouter");
 		btnAjouter_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -390,14 +390,6 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		JList lsm = (JList)e.getSource();
-			System.out.println(lsm.getName());
-		
-	}
-	
 	
 	public int getFocusList() {
 		return focusList;

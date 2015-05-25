@@ -1,4 +1,8 @@
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -7,7 +11,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 
-public class ControleurSelectionListe implements ListSelectionListener{
+public class ControleurSelectionListe implements MouseListener{
 	public static final int SLocal = 1;
 	public static final int SSalle = 2;
 	public static final int SOrdinateurPhysique = 3;
@@ -33,9 +37,27 @@ public class ControleurSelectionListe implements ListSelectionListener{
 		numeroListe = numListe;
 	}
 
+	private void changerBoutonsPhysique(String type){
+		fenetre.getBtnAjouter().setText("<html><center>Ajouter<br/>" + type + "</center></html>");
+		fenetre.getBtnModifier().setText("<html><center>Modifier<br/>" + type + "</center></html>");
+		fenetre.getBtnSupprimer().setText("<html><center>Supprimer<br/>" + type + "</center></html>");
+		fenetre.getBtnMiseJour().setText("<html><center>Mise à jour<br/>" + type + "</center></html>");
+		fenetre.getBtnActiver().setText("<html><center>Activer<br/>" + type + "</center></html>");
+		fenetre.getBtnDsactiver().setText("<html><center>Désactiver<br/>" + type + "</center></html>");
+	}
+	
+	private void changerBoutonsLogique(String type){
+		fenetre.getBtnAjouter_1().setText("<html><center>Ajouter<br/>" + type + "</center></html>");
+		fenetre.getBtnModifier_1().setText("<html><center>Modifier<br/>" + type + "</center></html>");
+		fenetre.getBtnSupprimer_1().setText("<html><center>Supprimer<br/>" + type + "</center></html>");
+		fenetre.getBtnMiseJour_1().setText("<html><center>Mise à jour<br/>" + type + "</center></html>");
+		fenetre.getBtnActiver_1().setText("<html><center>Activer<br/>" + type + "</center></html>");
+		fenetre.getBtnDsactiver_1().setText("<html><center>Désactiver<br/>" + type + "</center></html>");
+	}
+	
 	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		
+	public void mouseClicked(MouseEvent e) {
+
 		fenetre.setFocusList(numeroListe);
 		
 		switch(numeroListe){
@@ -107,44 +129,95 @@ public class ControleurSelectionListe implements ListSelectionListener{
 			changerBoutonsPhysique("Carte Res");
 			break;
 		case SRouteur :
-			changerBoutonsLogique("Routeur");
-			fenetre.getList_switchs().clearSelection();
-			fenetre.getList_ordinateurs_logique().clearSelection();
-			fenetre.getList_cartes_reseaux_logique().clearSelection();
+			if(selectionPrecedente != fenetre.getList_routeurs().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
+				changerBoutonsLogique("Routeur");
+				selectionPrecedente = fenetre.getList_routeurs().getSelectedIndex();
+				
+				//remplit les autres listes en fonction de l'élément
+				Routeur routeur = (Routeur) fenetre.getListeRouteurs().get(fenetre.getList_routeurs().getSelectedIndex());
+				listeSwitchs = routeur.getListeSwitch();
+				fenetre.getListeSwitchs().clear();
+				fenetre.getListeOrdinateurs2().clear();
+				fenetre.getListeCarteReseaux2().clear();
+				
+				for(Switch switchR : listeSwitchs){
+					fenetre.getListeSwitchs().addElement(switchR);
+					
+					for(Ordinateur ordinateur : switchR.getListeOrdinateur()){
+						fenetre.getListeOrdinateurs2().addElement(ordinateur);
+						
+						for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+							fenetre.getListeCarteReseaux2().addElement(carte);
+						}
+					}
+					
+				}
+			}
 			break;
 		case SSwitch :
-			changerBoutonsLogique("Switch");
-			fenetre.getList_ordinateurs_logique().clearSelection();
-			fenetre.getList_cartes_reseaux_logique().clearSelection();
+				changerBoutonsLogique("Switch");
+				selectionPrecedente = fenetre.getList_switchs().getSelectedIndex();
+				
+				//remplit les autres listes en fonction de l'élément
+				Switch switchR = (Switch) fenetre.getListeSwitchs().get(fenetre.getList_switchs().getSelectedIndex());
+				listeOrdinateurs = switchR.getListeOrdinateur();
+				fenetre.getListeOrdinateurs2().clear();
+				fenetre.getListeCarteReseaux2().clear();
+				
+				for(Ordinateur ordinateur : switchR.getListeOrdinateur()){
+					fenetre.getListeOrdinateurs2().addElement(ordinateur);
+					
+					for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+						fenetre.getListeCarteReseaux2().addElement(carte);
+					}
+				}
+			
 			break;
 		case SOrdinateurLogique :
-			changerBoutonsLogique("Ordinateur");
-			fenetre.getList_cartes_reseaux_logique().clearSelection();
+			if(selectionPrecedente != fenetre.getList_ordinateurs_logique().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
+				changerBoutonsLogique("Ordinateur");
+				selectionPrecedente = fenetre.getList_ordinateurs_logique().getSelectedIndex();
+				
+				//remplit les autres listes en fonction de l'élément
+				Ordinateur ordinateur = (Ordinateur) fenetre.getListeOrdinateurs2().get(fenetre.getList_ordinateurs_logique().getSelectedIndex());
+				
+				fenetre.getListeCarteReseaux2().clear();
+				
+				for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+					fenetre.getListeCarteReseaux2().addElement(carte);
+				}
+			}
 			break;
 		case SCarteReseauLogique :
 			changerBoutonsLogique("Carte Res");
 			break;
 			
 		}
+		
+	}
 
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	private void changerBoutonsPhysique(String type){
-		fenetre.getBtnAjouter().setText("<html><center>Ajouter<br/>" + type + "</center></html>");
-		fenetre.getBtnModifier().setText("<html><center>Modifier<br/>" + type + "</center></html>");
-		fenetre.getBtnSupprimer().setText("<html><center>Supprimer<br/>" + type + "</center></html>");
-		fenetre.getBtnMiseJour().setText("<html><center>Mise à jour<br/>" + type + "</center></html>");
-		fenetre.getBtnActiver().setText("<html><center>Activer<br/>" + type + "</center></html>");
-		fenetre.getBtnDsactiver().setText("<html><center>Désactiver<br/>" + type + "</center></html>");
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	private void changerBoutonsLogique(String type){
-		fenetre.getBtnAjouter_1().setText("<html><center>Ajouter<br/>" + type + "</center></html>");
-		fenetre.getBtnModifier_1().setText("<html><center>Modifier<br/>" + type + "</center></html>");
-		fenetre.getBtnSupprimer_1().setText("<html><center>Supprimer<br/>" + type + "</center></html>");
-		fenetre.getBtnMiseJour_1().setText("<html><center>Mise à jour<br/>" + type + "</center></html>");
-		fenetre.getBtnActiver_1().setText("<html><center>Activer<br/>" + type + "</center></html>");
-		fenetre.getBtnDsactiver_1().setText("<html><center>Désactiver<br/>" + type + "</center></html>");
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
