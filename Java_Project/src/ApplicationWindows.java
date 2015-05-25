@@ -371,32 +371,32 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		
 		btnAjouter_1 = new JButton("Ajouter");
 		btnAjouter_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnAjouter_1.setBounds(30, 222, 89, 23);
+		btnAjouter_1.setBounds(30, 222, 89, 35);
 		Reseau_logique.add(btnAjouter_1);
 		
 		btnModifier_1 = new JButton("Modifier");
 		btnModifier_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnModifier_1.setBounds(129, 222, 89, 23);
+		btnModifier_1.setBounds(129, 222, 89, 35);
 		Reseau_logique.add(btnModifier_1);
 		
 		btnSupprimer_1 = new JButton("Supprimer");
 		btnSupprimer_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnSupprimer_1.setBounds(228, 222, 89, 23);
+		btnSupprimer_1.setBounds(228, 222, 89, 35);
 		Reseau_logique.add(btnSupprimer_1);
 		
 		btnMiseJour_1 = new JButton("Mise \u00E0 jour");
 		btnMiseJour_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnMiseJour_1.setBounds(327, 222, 89, 23);
+		btnMiseJour_1.setBounds(327, 222, 89, 35);
 		Reseau_logique.add(btnMiseJour_1);
 		
 		btnActiver_1 = new JButton("Activer");
 		btnActiver_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnActiver_1.setBounds(426, 222, 89, 23);
+		btnActiver_1.setBounds(426, 222, 89, 35);
 		Reseau_logique.add(btnActiver_1);
 		
 		btnDsactiver_1 = new JButton("D\u00E9sactiver");
 		btnDsactiver_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnDsactiver_1.setBounds(525, 222, 89, 23);
+		btnDsactiver_1.setBounds(525, 222, 89, 35);
 		Reseau_logique.add(btnDsactiver_1);
 		
 		

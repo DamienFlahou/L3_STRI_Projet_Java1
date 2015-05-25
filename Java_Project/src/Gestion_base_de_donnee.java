@@ -19,6 +19,22 @@ public class Gestion_base_de_donnee {
 	private ArrayList<Routeur> reseauLogique = new ArrayList<Routeur>();
 	private ArrayList<Local> reseauPhysique = new ArrayList<Local>();
 	
+	public ArrayList<Routeur> getReseauLogique() {
+		return reseauLogique;
+	}
+
+	public void setReseauLogique(ArrayList<Routeur> reseauLogique) {
+		this.reseauLogique = reseauLogique;
+	}
+
+	public ArrayList<Local> getReseauPhysique() {
+		return reseauPhysique;
+	}
+
+	public void setReseauPhysique(ArrayList<Local> reseauPhysique) {
+		this.reseauPhysique = reseauPhysique;
+	}
+
 	public Gestion_base_de_donnee() throws Exception{
 		try{
 	
