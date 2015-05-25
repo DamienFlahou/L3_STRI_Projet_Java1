@@ -123,13 +123,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ordinateur` (
   `nom_ordinateur` VARCHAR(45) NULL,
   PRIMARY KEY (`id_ordinateur`),
   CONSTRAINT `fk_Ordinateur_1`
-    FOREIGN KEY ()
-    REFERENCES `mydb`.`Salle` ()
+    FOREIGN KEY (`id_salle`)
+    REFERENCES `mydb`.`Salle` (`id_salle`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Ordinateur_2`
-    FOREIGN KEY ()
-    REFERENCES `mydb`.`Switch` ()
+    FOREIGN KEY (`id_switch`)
+    REFERENCES `mydb`.`Switch` (`id_switch`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -146,8 +146,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Carte_reseau` (
   PRIMARY KEY (`id_carte_reseau`),
   INDEX `fk_Carte_reseau_2_idx` (`id_routeur` ASC),
   CONSTRAINT `fk_Carte_reseau_1`
-    FOREIGN KEY ()
-    REFERENCES `mydb`.`Ordinateur` ()
+    FOREIGN KEY (`id_ordinateur`)
+    REFERENCES `mydb`.`Ordinateur` (`id_ordinateur`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Carte_reseau_2`
