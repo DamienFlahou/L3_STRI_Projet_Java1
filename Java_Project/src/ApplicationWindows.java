@@ -56,13 +56,9 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 	// Sert à savoir quelle liste est focus pour pouvoir adapter le comportement des boutons
 	private int focusList = 1;
 	
-	public int getFocusList() {
-		return focusList;
-	}
-
-	public void setFocusList(int focusList) {
-		this.focusList = focusList;
-	}
+	private Gestion_base_de_donnee bdd;
+	private ArrayList<Routeur> reseauLogique;
+	private ArrayList<Local> reseauPhysique;
 
 	ArrayList<Local> listeLocaux = new ArrayList<Local>();
 	ArrayList<Salle> listeSalles = new ArrayList<Salle>();
@@ -97,7 +93,13 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 	private JButton btnActiver_1;
 	private JButton btnDsactiver_1;
 	
-	
+	public int getFocusList() {
+		return focusList;
+	}
+
+	public void setFocusList(int focusList) {
+		this.focusList = focusList;
+	}
 	
 	public JButton getBtnSupprimer() {
 		return btnSupprimer;
@@ -179,31 +181,53 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		return list_cartes_reseaux_logique;
 	}
 
-	public ApplicationWindows() {
-
-		listeLocaux.add(new Local("local 1"));
-		listeLocaux.add(new Local("local 2"));
+	public ApplicationWindows(Gestion_base_de_donnee _bdd) {
 		
-		listeSalles.add(new Salle("salle 1"));
-		listeSalles.add(new Salle("salle 2"));
+		bdd = _bdd;
 		
-		listeOrdinateurs.add(new Ordinateur("ordinateur 1"));
-		listeOrdinateurs.add(new Ordinateur("ordinateur 2"));
+		reseauLogique = bdd.getReseauLogique();
+		reseauPhysique = bdd.getReseauPhysique();
 		
-		listeCarteReseaux.add(new CarteReseau("00:00:00:00:00"));
-		listeCarteReseaux.add(new CarteReseau("11:11:11:11:11"));
+		//Remplissage réseau physique
+		for(Local local : reseauPhysique){
+			listeLocaux.add(local);
+			
+			for(Salle salle : local.getListeSalle()){
+				listeSalles.add(salle);
+				
+				for(Ordinateur ordinateur : salle.getListeOrdinateur()){
+					listeOrdinateurs.add(ordinateur);
+					
+					for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+						listeCarteReseaux.add(carte);
+					}
+				}
+			}
+		}
 		
-		listeRouteurs.add(new Routeur("routeur 1"));
-		listeRouteurs.add(new Routeur("routeur 2"));
 		
-		listeSwitchs.add(new Switch("switch 1"));
-		listeSwitchs.add(new Switch("switch 2"));
-		
-		listeOrdinateurs2.add(new Ordinateur("ordinateur 3"));
-		listeOrdinateurs2.add(new Ordinateur("ordinateur 4"));
-		
-		listeCarteReseaux2.add(new CarteReseau("22:22:22:22:22"));
-		listeCarteReseaux2.add(new CarteReseau("33:33:33:33:33"));
+		//Remplissage réseau logique
+		for(Routeur routeur : reseauLogique){
+			listeRouteurs.add(routeur);
+			
+			/* Il ne sert à rien d'afficher les cartes réseau du routeur
+			for (CarteReseau carteR : routeur.getListeCarteReseau()){
+				listeCarteReseaux2.add(carteR);
+			}
+			*/
+			
+			for(Switch switchRemplisseur : routeur.getListeSwitch()){
+				listeSwitchs.add(switchRemplisseur);
+				
+				for(Ordinateur ordinateur : switchRemplisseur.getListeOrdinateur()){
+					listeOrdinateurs2.add(ordinateur);
+					
+					for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+						listeCarteReseaux2.add(carte);
+					}
+				}
+			}
+		}
 		
 		initialize();
 		

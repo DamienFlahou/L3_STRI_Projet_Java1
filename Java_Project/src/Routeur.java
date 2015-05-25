@@ -7,6 +7,7 @@ public class Routeur {
 	private ArrayList<Salle> listeSalle = new ArrayList<Salle>();
 	private ArrayList<CarteReseau> listeCarteReseau = new ArrayList<CarteReseau>();
 	
+	
 	public Routeur(String nomRouteur) {
 		super();
 		this.nomRouteur = nomRouteur;
