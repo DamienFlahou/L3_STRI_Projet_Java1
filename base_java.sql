@@ -123,13 +123,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ordinateur` (
   `nom_ordinateur` VARCHAR(45) NULL,
   PRIMARY KEY (`id_ordinateur`),
   CONSTRAINT `fk_Ordinateur_1`
-    FOREIGN KEY ()
-    REFERENCES `mydb`.`Salle` ()
+    FOREIGN KEY (`id_salle`)
+    REFERENCES `mydb`.`Salle` (`id_salle`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Ordinateur_2`
-    FOREIGN KEY ()
-    REFERENCES `mydb`.`Switch` ()
+    FOREIGN KEY (`id_switch`)
+    REFERENCES `mydb`.`Switch` (`id_switch`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -146,8 +146,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Carte_reseau` (
   PRIMARY KEY (`id_carte_reseau`),
   INDEX `fk_Carte_reseau_2_idx` (`id_routeur` ASC),
   CONSTRAINT `fk_Carte_reseau_1`
-    FOREIGN KEY ()
-    REFERENCES `mydb`.`Ordinateur` ()
+    FOREIGN KEY (`id_ordinateur`)
+    REFERENCES `mydb`.`Ordinateur` (`id_ordinateur`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Carte_reseau_2`
@@ -172,12 +172,12 @@ INSERT INTO Local VALUES (1, 'Local1');
 INSERT INTO Local VALUES (2, 'Local2');
 
 -- ROUTEURS
-INSERT INTO Routeur VALUES (1, '', 'Routeur 1', '1');
-INSERT INTO Routeur VALUES (2, '', 'Routeur 2', '2');
+INSERT INTO Routeur VALUES (1, 0, 'Routeur 1', 1);
+INSERT INTO Routeur VALUES (2, 0, 'Routeur 2', 2);
 
 -- SWITCH
-INSERT INTO Switch VALUES (1, 1, '', 'Switch1',1);
-INSERT INTO Switch VALUES (2, 2, '', 'Switch2',2);
+INSERT INTO Switch VALUES (1, 1, 0, 'Switch1',1);
+INSERT INTO Switch VALUES (2, 2, 0, 'Switch2',2);
 
 -- SALLES
 INSERT INTO Salle VALUES (1, 1, 1, 1, 'Salle 1.1');
@@ -196,21 +196,26 @@ INSERT INTO Ordinateur VALUES (7, 4, 2, 'Ordi7');
 INSERT INTO Ordinateur VALUES (8, 4, 2, 'Ordi8');
 
 -- CARTES RESEAUX
-INSERT INTO Carte_reseau VALUES (1, 1, 1, '11:01:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (2, 1, 1, '11:01:43:00:00:02');
-INSERT INTO Carte_reseau VALUES (3, 2, 1, '11:02:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (4, 2, 1, '11:02:43:00:00:02');
-INSERT INTO Carte_reseau VALUES (5, 3, 1, '12:03:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (6, 3, 1, '12:03:43:00:00:02');
-INSERT INTO Carte_reseau VALUES (7, 4, 1, '12:04:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (8, 4, 1, '12:04:43:00:00:02');
-INSERT INTO Carte_reseau VALUES (9, 5, 2, '21:05:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (10, 5, 2, '21:05:43:00:00:02');
-INSERT INTO Carte_reseau VALUES (11, 6, 2, '21:06:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (12, 6, 2, '21:06:43:00:00:02');
-INSERT INTO Carte_reseau VALUES (13, 7, 2, '22:07:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (14, 7, 2, '22:07:43:00:00:02');
-INSERT INTO Carte_reseau VALUES (15, 8, 2, '22:08:43:00:00:01');
-INSERT INTO Carte_reseau VALUES (16, 8, 2, '22:08:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (1, 1, 0, '11:01:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (2, 1, 0, '11:01:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (3, 2, 0, '11:02:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (4, 2, 0, '11:02:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (5, 3, 0, '12:03:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (6, 3, 0, '12:03:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (7, 4, 0, '12:04:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (8, 4, 0, '12:04:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (9, 5, 0, '21:05:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (10, 5, 0, '21:05:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (11, 6, 0, '21:06:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (12, 6, 0, '21:06:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (13, 7, 0, '22:07:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (14, 7, 0, '22:07:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (15, 8, 0, '22:08:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (16, 8, 0, '22:08:43:00:00:02');
+
+INSERT INTO Carte_reseau VALUES (17, 0, 1, '44:08:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (18, 0, 1, '44:08:43:00:00:02');
+INSERT INTO Carte_reseau VALUES (19, 0, 2, '88:08:43:00:00:01');
+INSERT INTO Carte_reseau VALUES (20, 0, 2, '88:08:43:00:00:02');
 
 SET foreign_key_checks = 1;
