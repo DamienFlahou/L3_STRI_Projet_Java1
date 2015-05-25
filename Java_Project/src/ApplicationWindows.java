@@ -3,6 +3,7 @@ import javax.swing.JTabbedPane;
 
 import java.awt.BorderLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JLabel;
@@ -59,16 +60,16 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 	private Gestion_base_de_donnee bdd;
 	private ArrayList<Routeur> reseauLogique;
 	private ArrayList<Local> reseauPhysique;
-
-	ArrayList<Local> listeLocaux = new ArrayList<Local>();
-	ArrayList<Salle> listeSalles = new ArrayList<Salle>();
-	ArrayList<Ordinateur> listeOrdinateurs = new ArrayList<Ordinateur>();
-	ArrayList<CarteReseau> listeCarteReseaux = new ArrayList<CarteReseau>();
 	
-	ArrayList<Routeur> listeRouteurs = new ArrayList<Routeur>();
-	ArrayList<Switch> listeSwitchs = new ArrayList<Switch>();
-	ArrayList<Ordinateur> listeOrdinateurs2 = new ArrayList<Ordinateur>();
-	ArrayList<CarteReseau> listeCarteReseaux2 = new ArrayList<CarteReseau>();
+	DefaultListModel listeLocaux = new DefaultListModel();
+	DefaultListModel listeSalles = new DefaultListModel();
+	DefaultListModel listeOrdinateurs = new DefaultListModel();
+	DefaultListModel listeCarteReseaux = new DefaultListModel();
+	
+	DefaultListModel listeRouteurs = new DefaultListModel();
+	DefaultListModel listeSwitchs = new DefaultListModel();
+	DefaultListModel listeOrdinateurs2 = new DefaultListModel();
+	DefaultListModel listeCarteReseaux2 = new DefaultListModel();
 	
 	private JList list_locaux;
 	private JList list_salles;
@@ -92,123 +93,35 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 	private JButton btnMiseJour_1;
 	private JButton btnActiver_1;
 	private JButton btnDsactiver_1;
-	
-	public int getFocusList() {
-		return focusList;
-	}
-
-	public void setFocusList(int focusList) {
-		this.focusList = focusList;
-	}
-	
-	public JButton getBtnSupprimer() {
-		return btnSupprimer;
-	}
-
-	public JButton getBtnModifier() {
-		return btnModifier;
-	}
-
-	public JButton getBtnMiseJour() {
-		return btnMiseJour;
-	}
-
-	public JButton getBtnActiver() {
-		return btnActiver;
-	}
-
-	public JButton getBtnDsactiver() {
-		return btnDsactiver;
-	}
-
-	public JButton getBtnAjouter_1() {
-		return btnAjouter_1;
-	}
-
-	public JButton getBtnSupprimer_1() {
-		return btnSupprimer_1;
-	}
-
-	public JButton getBtnModifier_1() {
-		return btnModifier_1;
-	}
-
-	public JButton getBtnMiseJour_1() {
-		return btnMiseJour_1;
-	}
-
-	public JButton getBtnActiver_1() {
-		return btnActiver_1;
-	}
-
-	public JButton getBtnDsactiver_1() {
-		return btnDsactiver_1;
-	}
-
-	public JButton getBtnAjouter() {
-		return btnAjouter;
-	}
-
-	public JList getList_locaux() {
-		return list_locaux;
-	}
-
-	public JList getList_salles() {
-		return list_salles;
-	}
-
-	public JList getList_ordinateurs_physique() {
-		return list_ordinateurs_physique;
-	}
-
-	public JList getList_cartes_reseaux() {
-		return list_cartes_reseaux;
-	}
-
-	public JList getList_routeurs() {
-		return list_routeurs;
-	}
-
-	public JList getList_switchs() {
-		return list_switchs;
-	}
-
-	public JList getList_ordinateurs_logique() {
-		return list_ordinateurs_logique;
-	}
-
-	public JList getList_cartes_reseaux_logique() {
-		return list_cartes_reseaux_logique;
-	}
 
 	public ApplicationWindows(Gestion_base_de_donnee _bdd) {
 		
 		bdd = _bdd;
+		
 		
 		reseauLogique = bdd.getReseauLogique();
 		reseauPhysique = bdd.getReseauPhysique();
 		
 		//Remplissage réseau physique
 		for(Local local : reseauPhysique){
-			listeLocaux.add(local);
+			listeLocaux.addElement(local);
 			
 			for(Salle salle : local.getListeSalle()){
-				listeSalles.add(salle);
+				listeSalles.addElement(salle);
 				
 				for(Ordinateur ordinateur : salle.getListeOrdinateur()){
-					listeOrdinateurs.add(ordinateur);
+					listeOrdinateurs.addElement(ordinateur);
 					
 					for(CarteReseau carte : ordinateur.getListeCarteReseau()){
-						listeCarteReseaux.add(carte);
+						listeCarteReseaux.addElement(carte);
 					}
 				}
 			}
 		}
 		
-		
 		//Remplissage réseau logique
 		for(Routeur routeur : reseauLogique){
-			listeRouteurs.add(routeur);
+			listeRouteurs.addElement(routeur);
 			
 			/* Il ne sert à rien d'afficher les cartes réseau du routeur
 			for (CarteReseau carteR : routeur.getListeCarteReseau()){
@@ -217,13 +130,13 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 			*/
 			
 			for(Switch switchRemplisseur : routeur.getListeSwitch()){
-				listeSwitchs.add(switchRemplisseur);
+				listeSwitchs.addElement(switchRemplisseur);
 				
 				for(Ordinateur ordinateur : switchRemplisseur.getListeOrdinateur()){
-					listeOrdinateurs2.add(ordinateur);
+					listeOrdinateurs2.addElement(ordinateur);
 					
 					for(CarteReseau carte : ordinateur.getListeCarteReseau()){
-						listeCarteReseaux2.add(carte);
+						listeCarteReseaux2.addElement(carte);
 					}
 				}
 			}
@@ -277,24 +190,24 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		lblLocaux.setBounds(48, 33, 135, 23);
 		Reseau_physique.add(lblLocaux);
 		
-		list_locaux = new JList(listeLocaux.toArray());
+		list_locaux = new JList(listeLocaux);
 		list_locaux.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_locaux.setToolTipText("");
 		list_locaux.setBounds(48, 54, 135, 157);
 		Reseau_physique.add(list_locaux);
 		
 		
-		list_salles = new JList(listeSalles.toArray());
+		list_salles = new JList(listeSalles);
 		list_salles.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_salles.setBounds(182, 54, 135, 157);
 		Reseau_physique.add(list_salles);
 		
-		list_ordinateurs_physique = new JList(listeOrdinateurs.toArray());
+		list_ordinateurs_physique = new JList(listeOrdinateurs);
 		list_ordinateurs_physique.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_ordinateurs_physique.setBounds(316, 54, 135, 157);
 		Reseau_physique.add(list_ordinateurs_physique);
 		
-		list_cartes_reseaux = new JList(listeCarteReseaux.toArray());
+		list_cartes_reseaux = new JList(listeCarteReseaux);
 		list_cartes_reseaux.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_cartes_reseaux.setBounds(450, 54, 135, 157);
 		Reseau_physique.add(list_cartes_reseaux);
@@ -377,22 +290,22 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		lblRouteurs.setBounds(48, 33, 135, 23);
 		Reseau_logique.add(lblRouteurs);
 		
-		list_routeurs = new JList(listeRouteurs.toArray());
+		list_routeurs = new JList(listeRouteurs);
 		list_routeurs.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_routeurs.setBounds(48, 54, 135, 157);
 		Reseau_logique.add(list_routeurs);
 		
-		list_switchs = new JList(listeSwitchs.toArray());
+		list_switchs = new JList(listeSwitchs);
 		list_switchs.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_switchs.setBounds(182, 54, 135, 157);
 		Reseau_logique.add(list_switchs);
 		
-		list_ordinateurs_logique = new JList(listeOrdinateurs2.toArray());
+		list_ordinateurs_logique = new JList(listeOrdinateurs2);
 		list_ordinateurs_logique.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_ordinateurs_logique.setBounds(316, 54, 135, 157);
 		Reseau_logique.add(list_ordinateurs_logique);
 		
-		list_cartes_reseaux_logique = new JList(listeCarteReseaux2.toArray());
+		list_cartes_reseaux_logique = new JList(listeCarteReseaux2);
 		list_cartes_reseaux_logique.setBorder(new LineBorder(new Color(0, 0, 0)));
 		list_cartes_reseaux_logique.setBounds(450, 54, 135, 157);
 		Reseau_logique.add(list_cartes_reseaux_logique);
@@ -485,5 +398,125 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		
 	}
 	
+	
+	public int getFocusList() {
+		return focusList;
+	}
+
+	public void setFocusList(int focusList) {
+		this.focusList = focusList;
+	}
+	
+	public JButton getBtnSupprimer() {
+		return btnSupprimer;
+	}
+
+	public JButton getBtnModifier() {
+		return btnModifier;
+	}
+
+	public JButton getBtnMiseJour() {
+		return btnMiseJour;
+	}
+
+	public JButton getBtnActiver() {
+		return btnActiver;
+	}
+
+	public JButton getBtnDsactiver() {
+		return btnDsactiver;
+	}
+
+	public JButton getBtnAjouter_1() {
+		return btnAjouter_1;
+	}
+
+	public JButton getBtnSupprimer_1() {
+		return btnSupprimer_1;
+	}
+
+	public JButton getBtnModifier_1() {
+		return btnModifier_1;
+	}
+
+	public JButton getBtnMiseJour_1() {
+		return btnMiseJour_1;
+	}
+
+	public JButton getBtnActiver_1() {
+		return btnActiver_1;
+	}
+
+	public JButton getBtnDsactiver_1() {
+		return btnDsactiver_1;
+	}
+
+	public JButton getBtnAjouter() {
+		return btnAjouter;
+	}
+
+	public JList getList_locaux() {
+		return list_locaux;
+	}
+
+	public JList getList_salles() {
+		return list_salles;
+	}
+
+	public JList getList_ordinateurs_physique() {
+		return list_ordinateurs_physique;
+	}
+
+	public JList getList_cartes_reseaux() {
+		return list_cartes_reseaux;
+	}
+
+	public JList getList_routeurs() {
+		return list_routeurs;
+	}
+
+	public JList getList_switchs() {
+		return list_switchs;
+	}
+
+	public JList getList_ordinateurs_logique() {
+		return list_ordinateurs_logique;
+	}
+
+	public JList getList_cartes_reseaux_logique() {
+		return list_cartes_reseaux_logique;
+	}
+
+	public DefaultListModel getListeLocaux() {
+		return listeLocaux;
+	}
+
+	public DefaultListModel getListeSalles() {
+		return listeSalles;
+	}
+
+	public DefaultListModel getListeOrdinateurs() {
+		return listeOrdinateurs;
+	}
+
+	public DefaultListModel getListeCarteReseaux() {
+		return listeCarteReseaux;
+	}
+
+	public DefaultListModel getListeRouteurs() {
+		return listeRouteurs;
+	}
+
+	public DefaultListModel getListeSwitchs() {
+		return listeSwitchs;
+	}
+
+	public DefaultListModel getListeOrdinateurs2() {
+		return listeOrdinateurs2;
+	}
+
+	public DefaultListModel getListeCarteReseaux2() {
+		return listeCarteReseaux2;
+	}
 	
 }

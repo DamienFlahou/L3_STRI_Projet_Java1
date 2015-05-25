@@ -1,3 +1,7 @@
+import java.awt.Component;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,6 +20,14 @@ public class ControleurSelectionListe implements ListSelectionListener{
 	ApplicationWindows fenetre;
 	int numeroListe;
 	
+	int selectionPrecedente = -1;  //Permet d'éviter les multiples triggers
+	
+	ArrayList<Salle> listeSalles = null;
+	ArrayList<Ordinateur> listeOrdinateurs = null;
+	
+	ArrayList<Switch> listeSwitchs = null;
+	ArrayList<Ordinateur> listeOrdinateurs2 = null;
+	
 	public ControleurSelectionListe(ApplicationWindows _fenetre, int numListe){
 		fenetre = _fenetre;
 		numeroListe = numListe;
@@ -24,51 +36,97 @@ public class ControleurSelectionListe implements ListSelectionListener{
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		
-		if(fenetre.getFocusList() != numeroListe){
-			
-			fenetre.setFocusList(numeroListe);
-			
-			switch(numeroListe){
-			case SLocal :
+		fenetre.setFocusList(numeroListe);
+		
+		switch(numeroListe){
+		case SLocal :
+			if(selectionPrecedente != fenetre.getList_locaux().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
 				changerBoutonsPhysique("Local");
-				fenetre.getList_salles().clearSelection();
-				fenetre.getList_ordinateurs_physique().clearSelection();
-				fenetre.getList_cartes_reseaux().clearSelection();
-				break;
-			case SSalle :
-				changerBoutonsPhysique("Salle");
-				fenetre.getList_ordinateurs_physique().clearSelection();
-				fenetre.getList_cartes_reseaux().clearSelection();
-				break;
-			case SOrdinateurPhysique :
-				changerBoutonsPhysique("Ordinateur");
-				fenetre.getList_cartes_reseaux().clearSelection();
-				break;
-			case SCarteReseauPhysique :
-				changerBoutonsPhysique("Carte Res");
-				break;
-			case SRouteur :
-				changerBoutonsLogique("Routeur");
-				fenetre.getList_switchs().clearSelection();
-				fenetre.getList_ordinateurs_logique().clearSelection();
-				fenetre.getList_cartes_reseaux_logique().clearSelection();
-				break;
-			case SSwitch :
-				changerBoutonsLogique("Switch");
-				fenetre.getList_ordinateurs_logique().clearSelection();
-				fenetre.getList_cartes_reseaux_logique().clearSelection();
-				break;
-			case SOrdinateurLogique :
-				changerBoutonsLogique("Ordinateur");
-				fenetre.getList_cartes_reseaux_logique().clearSelection();
-				break;
-			case SCarteReseauLogique :
-				changerBoutonsLogique("Carte Res");
-				break;
+				selectionPrecedente = fenetre.getList_locaux().getSelectedIndex();
 				
+				//remplit les autres listes en fonction de l'élément
+				Local local = (Local) fenetre.getListeLocaux().get(fenetre.getList_locaux().getSelectedIndex());
+				listeSalles = local.getListeSalle();
+				fenetre.getListeSalles().clear();
+				fenetre.getListeOrdinateurs().clear();
+				fenetre.getListeCarteReseaux().clear();
+				
+				for(Salle salle : listeSalles){
+					fenetre.getListeSalles().addElement(salle);
+					
+					for(Ordinateur ordinateur : salle.getListeOrdinateur()){
+						fenetre.getListeOrdinateurs().addElement(ordinateur);
+						
+						for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+							fenetre.getListeCarteReseaux().addElement(carte);
+						}
+					}
+					
+				}
 			}
-
+			break;
+		case SSalle :
+			if(selectionPrecedente != fenetre.getList_salles().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
+				
+				changerBoutonsPhysique("Salle");
+				selectionPrecedente = fenetre.getList_salles().getSelectedIndex();
+				
+				//remplit les autres listes en fonction de l'élément
+				Salle salle = (Salle) fenetre.getListeSalles().get(fenetre.getList_salles().getSelectedIndex());
+				
+				fenetre.getListeOrdinateurs().clear();
+				fenetre.getListeCarteReseaux().clear();
+				
+				for(Ordinateur ordinateur : salle.getListeOrdinateur()){
+					fenetre.getListeOrdinateurs().addElement(ordinateur);
+					
+					for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+						fenetre.getListeCarteReseaux().addElement(carte);
+					}
+				}
+			}
+			break;
+		case SOrdinateurPhysique :
+			if(selectionPrecedente != fenetre.getList_ordinateurs_physique().getSelectedIndex() || fenetre.getFocusList() != numeroListe){
+					
+				changerBoutonsPhysique("Ordinateur");
+	
+				selectionPrecedente = fenetre.getList_ordinateurs_physique().getSelectedIndex();
+				
+				//remplit les autres listes en fonction de l'élément
+				Ordinateur ordinateur = (Ordinateur) fenetre.getListeOrdinateurs().get(fenetre.getList_ordinateurs_physique().getSelectedIndex());
+				
+				fenetre.getListeCarteReseaux().clear();
+				
+				for(CarteReseau carte : ordinateur.getListeCarteReseau()){
+					fenetre.getListeCarteReseaux().addElement(carte);
+				}
+			}
+			break;
+		case SCarteReseauPhysique :
+			changerBoutonsPhysique("Carte Res");
+			break;
+		case SRouteur :
+			changerBoutonsLogique("Routeur");
+			fenetre.getList_switchs().clearSelection();
+			fenetre.getList_ordinateurs_logique().clearSelection();
+			fenetre.getList_cartes_reseaux_logique().clearSelection();
+			break;
+		case SSwitch :
+			changerBoutonsLogique("Switch");
+			fenetre.getList_ordinateurs_logique().clearSelection();
+			fenetre.getList_cartes_reseaux_logique().clearSelection();
+			break;
+		case SOrdinateurLogique :
+			changerBoutonsLogique("Ordinateur");
+			fenetre.getList_cartes_reseaux_logique().clearSelection();
+			break;
+		case SCarteReseauLogique :
+			changerBoutonsLogique("Carte Res");
+			break;
+			
 		}
+
 	}
 	
 	private void changerBoutonsPhysique(String type){
