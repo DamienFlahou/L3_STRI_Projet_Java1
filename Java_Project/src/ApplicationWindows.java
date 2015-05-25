@@ -39,6 +39,20 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 	public static final int SOrdinateurLogique = 7;
 	public static final int SCarteReseauLogique = 8;
 	
+	public static final int SBoutonAjouter = 1;
+	public static final int SBoutonModifier = 2;
+	public static final int SBoutonSupprimer = 3;
+	public static final int SBoutonMiseJour = 4;
+	public static final int SBoutonActiver = 5;
+	public static final int SBoutonDsActiver = 6;
+	
+	public static final int SBoutonAjouter_1 = 7;
+	public static final int SBoutonModifier_1 = 8;
+	public static final int SBoutonSupprimer_1 = 9;
+	public static final int SBoutonMiseJour_1 = 10;
+	public static final int SBoutonActiver_1 = 11;
+	public static final int SBoutonDsActiver_1 = 12;
+	
 	// Sert à savoir quelle liste est focus pour pouvoir adapter le comportement des boutons
 	private int focusList = 1;
 	
@@ -270,10 +284,6 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		
 		btnAjouter = new JButton("Ajouter");
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnAjouter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnAjouter.setBounds(30, 222, 89, 35);
 		Reseau_physique.add(btnAjouter);
 		
@@ -304,12 +314,12 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		
 		//Ajout du mouse listener pour savoir quand le bouton est cliqué
 		
-		btnAjouter.addMouseListener(this);
-		btnActiver.addMouseListener(this);
-		btnDsactiver.addMouseListener(this);
-		btnMiseJour.addMouseListener(this);
-		btnModifier.addMouseListener(this);
-		btnSupprimer.addMouseListener(this);
+		btnAjouter.addMouseListener(new ControleurBouton(this, SBoutonAjouter));
+		btnActiver.addMouseListener(new ControleurBouton(this, SBoutonActiver));
+		btnDsactiver.addMouseListener(new ControleurBouton(this, SBoutonDsActiver));
+		btnMiseJour.addMouseListener(new ControleurBouton(this, SBoutonMiseJour));
+		btnModifier.addMouseListener(new ControleurBouton(this, SBoutonModifier));
+		btnSupprimer.addMouseListener(new ControleurBouton(this, SBoutonSupprimer));
 		
 		JPanel Reseau_logique = new JPanel();
 		tabbedPane.addTab("R\u00E9seau logique", null, Reseau_logique, null);
@@ -399,7 +409,14 @@ public class ApplicationWindows extends JFrame implements ListSelectionListener,
 		btnDsactiver_1.setBounds(525, 222, 89, 35);
 		Reseau_logique.add(btnDsactiver_1);
 		
+		//Ajout du mouse listener pour savoir quand le bouton est cliqué et afficher la fenetre correspondnte
 		
+		btnAjouter_1.addMouseListener(new ControleurBouton(this, SBoutonAjouter_1));
+		btnActiver_1.addMouseListener(new ControleurBouton(this, SBoutonActiver_1));
+		btnDsactiver_1.addMouseListener(new ControleurBouton(this, SBoutonDsActiver_1));
+		btnMiseJour_1.addMouseListener(new ControleurBouton(this, SBoutonMiseJour_1));
+		btnModifier_1.addMouseListener(new ControleurBouton(this, SBoutonModifier_1));
+		btnSupprimer_1.addMouseListener(new ControleurBouton(this, SBoutonSupprimer_1));		
 	}
 
 	public static int getScartereseauphysique() {

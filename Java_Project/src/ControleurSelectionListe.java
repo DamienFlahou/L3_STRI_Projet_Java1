@@ -25,56 +25,42 @@ public class ControleurSelectionListe implements ListSelectionListener{
 	public void valueChanged(ListSelectionEvent e) {
 		
 		if(fenetre.getFocusList() != numeroListe){
-			switch(fenetre.getFocusList()){
-			case SLocal :
-				fenetre.getList_locaux().clearSelection();
-				break;
-			case SSalle :
-				fenetre.getList_salles().clearSelection();
-				break;
-			case SOrdinateurPhysique :
-				fenetre.getList_ordinateurs_physique().clearSelection();
-				break;
-			case SCarteReseauPhysique :
-				fenetre.getList_cartes_reseaux().clearSelection();
-				break;
-			case SRouteur :
-				fenetre.getList_routeurs().clearSelection();
-				break;
-			case SSwitch :
-				fenetre.getList_switchs().clearSelection();
-				break;
-			case SOrdinateurLogique :
-				fenetre.getList_ordinateurs_logique().clearSelection();
-				break;
-			case SCarteReseauLogique : 
-				fenetre.getList_cartes_reseaux_logique().clearSelection();
-				break;
-			}
 			
 			fenetre.setFocusList(numeroListe);
 			
 			switch(numeroListe){
 			case SLocal :
 				changerBoutonsPhysique("Local");
+				fenetre.getList_salles().clearSelection();
+				fenetre.getList_ordinateurs_physique().clearSelection();
+				fenetre.getList_cartes_reseaux().clearSelection();
 				break;
 			case SSalle :
 				changerBoutonsPhysique("Salle");
+				fenetre.getList_ordinateurs_physique().clearSelection();
+				fenetre.getList_cartes_reseaux().clearSelection();
 				break;
 			case SOrdinateurPhysique :
 				changerBoutonsPhysique("Ordinateur");
+				fenetre.getList_cartes_reseaux().clearSelection();
 				break;
 			case SCarteReseauPhysique :
 				changerBoutonsPhysique("Carte Res");
 				break;
 			case SRouteur :
 				changerBoutonsLogique("Routeur");
+				fenetre.getList_switchs().clearSelection();
+				fenetre.getList_ordinateurs_logique().clearSelection();
+				fenetre.getList_cartes_reseaux_logique().clearSelection();
 				break;
 			case SSwitch :
 				changerBoutonsLogique("Switch");
+				fenetre.getList_ordinateurs_logique().clearSelection();
+				fenetre.getList_cartes_reseaux_logique().clearSelection();
 				break;
 			case SOrdinateurLogique :
 				changerBoutonsLogique("Ordinateur");
+				fenetre.getList_cartes_reseaux_logique().clearSelection();
 				break;
 			case SCarteReseauLogique :
 				changerBoutonsLogique("Carte Res");
