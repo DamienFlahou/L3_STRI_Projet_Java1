@@ -23,6 +23,7 @@ USE `mydb` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`Local` (
   `id_local` INT NOT NULL AUTO_INCREMENT,
   `nom_local` VARCHAR(45) NULL,
+  `statut` boolean NOT NULL default 1,
   PRIMARY KEY (`id_local`))
 ENGINE = InnoDB;
 
@@ -35,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Routeur` (
   `id_salle` INT NULL,
   `nom_routeur` VARCHAR(45) NULL,
   `id_local` INT NULL,
+  `statut` boolean NOT NULL default 1,
   PRIMARY KEY (`id_routeur`),
   INDEX `fk_Routeur_1_idx` (`id_salle` ASC),
   INDEX `fk_Routeur_2_idx` (`id_local` ASC),
@@ -60,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Switch` (
   `id_salle` INT NULL,
   `nom_switch` VARCHAR(45) NULL,
   `id_local` INT NULL,
+  `statut` boolean NOT NULL default 1,
   PRIMARY KEY (`id_switch`),
   INDEX `fk_Switch_1_idx` (`id_routeur` ASC),
   INDEX `fk_Switch_2_idx` (`id_salle` ASC),
@@ -91,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Salle` (
   `id_routeur` INT NULL,
   `id_switch` INT NULL,
   `nom_salle` VARCHAR(45) NULL,
+  `statut` boolean NOT NULL default 1,
   PRIMARY KEY (`id_salle`),
   INDEX `fk_Salle_1_idx` (`id_local` ASC),
   INDEX `fk_Salle_2_idx` (`id_routeur` ASC),
@@ -122,6 +126,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ordinateur` (
   `id_switch` INT NULL,
   `nom_ordinateur` VARCHAR(45) NULL,
   `OS` varchar(45) NULL,
+  `statut` boolean NOT NULL default 1,
   PRIMARY KEY (`id_ordinateur`),
   CONSTRAINT `fk_Ordinateur_1`
     FOREIGN KEY (`id_salle`)
@@ -170,32 +175,32 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 SET foreign_key_checks = 0;
 
 -- LOCAUX
-INSERT INTO Local VALUES (1, 'Local1');
-INSERT INTO Local VALUES (2, 'Local2');
+INSERT INTO Local VALUES (1, 'Local1', 1);
+INSERT INTO Local VALUES (2, 'Local2', 1);
 
 -- ROUTEURS
-INSERT INTO Routeur VALUES (1, 0, 'Routeur 1', 1);
-INSERT INTO Routeur VALUES (2, 0, 'Routeur 2', 2);
+INSERT INTO Routeur VALUES (1, 0, 'Routeur 1', 1, 1);
+INSERT INTO Routeur VALUES (2, 0, 'Routeur 2', 2, 1);
 
 -- SWITCH
-INSERT INTO Switch VALUES (1, 1, 0, 'Switch1',1);
-INSERT INTO Switch VALUES (2, 2, 0, 'Switch2',2);
+INSERT INTO Switch VALUES (1, 1, 0, 'Switch1',1, 1);
+INSERT INTO Switch VALUES (2, 2, 0, 'Switch2',2, 1);
 
 -- SALLES
-INSERT INTO Salle VALUES (1, 1, 1, 1, 'Salle 1.1');
-INSERT INTO Salle VALUES (2, 1, 1, 1, 'Salle 1.2');
-INSERT INTO Salle VALUES (3, 2, 2, 2, 'Salle 2.1');
-INSERT INTO Salle VALUES (4, 2, 2, 2, 'Salle 2.2');
+INSERT INTO Salle VALUES (1, 1, 1, 1, 'Salle 1.1', 1);
+INSERT INTO Salle VALUES (2, 1, 1, 1, 'Salle 1.2', 1);
+INSERT INTO Salle VALUES (3, 2, 2, 2, 'Salle 2.1', 1);
+INSERT INTO Salle VALUES (4, 2, 2, 2, 'Salle 2.2', 1);
 
 -- ORDINATEURS
-INSERT INTO Ordinateur VALUES (1, 1, 1, 'Ordi1', 'Linux');
-INSERT INTO Ordinateur VALUES (2, 1, 1, 'Ordi2', 'Linux');
-INSERT INTO Ordinateur VALUES (3, 2, 1, 'Ordi3', 'Linux');
-INSERT INTO Ordinateur VALUES (4, 2, 1, 'Ordi4', 'Linux');
-INSERT INTO Ordinateur VALUES (5, 3, 2, 'Ordi5', 'Windows');
-INSERT INTO Ordinateur VALUES (6, 3, 2, 'Ordi6', 'Windows');
-INSERT INTO Ordinateur VALUES (7, 4, 2, 'Ordi7', 'Windows');
-INSERT INTO Ordinateur VALUES (8, 4, 2, 'Ordi8', 'Windows');
+INSERT INTO Ordinateur VALUES (1, 1, 1, 'Ordi1', 'Linux', 1);
+INSERT INTO Ordinateur VALUES (2, 1, 1, 'Ordi2', 'Linux', 1);
+INSERT INTO Ordinateur VALUES (3, 2, 1, 'Ordi3', 'Linux', 1);
+INSERT INTO Ordinateur VALUES (4, 2, 1, 'Ordi4', 'Linux', 1);
+INSERT INTO Ordinateur VALUES (5, 3, 2, 'Ordi5', 'Windows', 1);
+INSERT INTO Ordinateur VALUES (6, 3, 2, 'Ordi6', 'Windows', 1);
+INSERT INTO Ordinateur VALUES (7, 4, 2, 'Ordi7', 'Windows', 1);
+INSERT INTO Ordinateur VALUES (8, 4, 2, 'Ordi8', 'Windows', 1);
 
 -- CARTES RESEAUX
 INSERT INTO Carte_reseau VALUES (1, 1, 0, '11:01:43:00:00:01', 1);
