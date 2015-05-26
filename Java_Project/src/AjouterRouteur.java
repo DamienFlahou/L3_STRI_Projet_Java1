@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class AjouterOrdinateur extends JFrame{
+public class AjouterRouteur extends JFrame{
 
 	private JTextField textField;
 
@@ -20,7 +20,7 @@ public class AjouterOrdinateur extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public AjouterOrdinateur() {
+	public AjouterRouteur() {
 		initialize();
 	}
 
@@ -38,7 +38,7 @@ public class AjouterOrdinateur extends JFrame{
 		lblNom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNom.setBounds(22, 35, 70, 14);
 		this.getContentPane().add(lblNom);
-		setResizable(false);
+		this.setResizable(false);
 		
 		JLabel lblLocal = new JLabel("Local");
 		lblLocal.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -51,18 +51,6 @@ public class AjouterOrdinateur extends JFrame{
 		lblSalle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSalle.setBounds(22, 85, 70, 14);
 		this.getContentPane().add(lblSalle);
-		
-		JLabel lblSwitch = new JLabel("Switch");
-		lblSwitch.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblSwitch.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSwitch.setBounds(22, 110, 70, 14);
-		this.getContentPane().add(lblSwitch);
-		
-		JLabel lblCarteRseau = new JLabel("Carte r\u00E9seau");
-		lblCarteRseau.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCarteRseau.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblCarteRseau.setBounds(22, 157, 70, 14);
-		this.getContentPane().add(lblCarteRseau);
 		
 		textField = new JTextField();
 		textField.setBounds(102, 33, 229, 17);
@@ -99,14 +87,5 @@ public class AjouterOrdinateur extends JFrame{
 		btnAnnuler.setBounds(260, 227, 89, 23);
 		this.getContentPane().add(btnAnnuler);
 		
-		JButton btnAjouterCarteRseau = new JButton("Ajouter carte r\u00E9seau");
-		btnAjouterCarteRseau.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnAjouterCarteRseau.setBounds(133, 227, 127, 23);
-		this.getContentPane().add(btnAjouterCarteRseau);
-		
-		JButton btnRetirerCarteRseau = new JButton("Retirer carte r\u00E9seau");
-		btnRetirerCarteRseau.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnRetirerCarteRseau.setBounds(10, 227, 121, 23);
-		this.getContentPane().add(btnRetirerCarteRseau);
 	}
 }
