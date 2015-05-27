@@ -1,3 +1,5 @@
+package Model;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -129,7 +131,7 @@ public class Gestion_base_de_donnee {
 		    for(i = 0; i < nombreRouteurs; i++){
 		    	resultSetRouteur.next();
 		    	
-		    	Routeur routeurRemplisseur = new Routeur(resultSetRouteur.getString("nom_routeur"));
+		    	Routeur routeurRemplisseur = new Routeur(resultSetRouteur.getString("nom_routeur"), resultSetRouteur.getBoolean("statut"));
 		    	
 		    	id = resultSetRouteur.getInt("id_routeur");
 		    	
@@ -143,7 +145,7 @@ public class Gestion_base_de_donnee {
 			    for(j = 0; j < nombreSwitchs; j++){
 			    	resultSetSwitch.next();
 			    	
-			    	Switch switchRemplisseur = new Switch(resultSetSwitch.getString("nom_switch"));
+			    	Switch switchRemplisseur = new Switch(resultSetSwitch.getString("nom_switch"), resultSetSwitch.getBoolean("statut"));
 			    	
 			    	id = resultSetSwitch.getInt("id_switch");
 			    	
@@ -156,7 +158,7 @@ public class Gestion_base_de_donnee {
 				    for(k = 0; k < nombreOrdinateurs; k++){
 				    	resultSetOrdinateur.next();
 				    	
-				    	Ordinateur ordinateurRemplisseur = new Ordinateur(resultSetOrdinateur.getString("nom_ordinateur"));
+				    	Ordinateur ordinateurRemplisseur = new Ordinateur(resultSetOrdinateur.getString("nom_ordinateur"), resultSetOrdinateur.getBoolean("statut"));
 				    	
 				    	id = resultSetOrdinateur.getInt("id_ordinateur");
 				    	
@@ -170,7 +172,7 @@ public class Gestion_base_de_donnee {
 				    		resultSetCarteReseau.next();
 				    		
 				    		//crée la carte réseau
-				    		CarteReseau carteReseauRemplisseur = new CarteReseau(resultSetCarteReseau.getString("adresse_mac"));
+				    		CarteReseau carteReseauRemplisseur = new CarteReseau(resultSetCarteReseau.getString("adresse_mac"), resultSetCarteReseau.getBoolean("statut"));
 				    		//ajoute la carte réseau à l'ordinateur
 				    		ordinateurRemplisseur.AjouterCarteReseau(carteReseauRemplisseur);
 				    	}
@@ -195,7 +197,7 @@ public class Gestion_base_de_donnee {
 		    		resultSetCarteReseau.next();
 		    		
 		    		//crée la carte réseau
-		    		CarteReseau carteReseauRemplisseur = new CarteReseau(resultSetCarteReseau.getString("adresse_mac"));
+		    		CarteReseau carteReseauRemplisseur = new CarteReseau(resultSetCarteReseau.getString("adresse_mac"), resultSetCarteReseau.getBoolean("statut"));
 		    		//ajoute la carte réseau à l'ordinateur
 		    		routeurRemplisseur.AjouterCarteReseau(carteReseauRemplisseur);
 		    	}
@@ -231,7 +233,7 @@ public class Gestion_base_de_donnee {
 		    for(i = 0; i < nombreLocaux; i++){
 		    	resultSetLocal.next();
 			
-		    	Local localRemplisseur = new Local(resultSetLocal.getString("nom_local"));
+		    	Local localRemplisseur = new Local(resultSetLocal.getString("nom_local"), resultSetLocal.getBoolean("statut"));
 		    	
 		    	/** Ajoute les Routeurs au Local **/
 		    	
@@ -248,7 +250,12 @@ public class Gestion_base_de_donnee {
 			    for(j = 0; j < nombreRouteurs; j++){
 			    	resultSetRouteur.next();
 			    	
-			    	localRemplisseur.AjouterRouteur(resultSetRouteur.getString("nom_routeur"));
+			    	/** Populate le réseau physique avec le réseau logique **/
+			    	for(int a = 0; a < reseauLogique.size(); a++){
+			    		if(reseauLogique.get(a).getNomRouteur().equals((resultSetRouteur).getString("nom_routeur"))){
+			    			localRemplisseur.AjouterRouteur(reseauLogique.get(a));
+			    		}
+			    	}
 			    }
 			    
 			    /**Ajoute les Switchs au Local **/
@@ -263,10 +270,17 @@ public class Gestion_base_de_donnee {
 			    //Recherche tous les routeurs présents dans le local
 				resultSetSwitch = statement3.executeQuery(new StringBuilder("select * from Switch WHERE id_local = ").append(id).toString());
 			    
+				/** Ajoute les switchs précédemment crée dans le réseau logique **/
 			    for(j = 0; j < nombreSwitchs; j++){
 			    	resultSetSwitch.next();
 			    	
-			    	localRemplisseur.AjouterSwitch(resultSetSwitch.getString("nom_switch"));
+			    	for(int a = 0; a < reseauLogique.size(); a++){
+			    		for(Switch switchR : reseauLogique.get(a).getListeSwitch()){
+			    			if(switchR.getNomSwitch().equals((resultSetSwitch).getString("nom_switch"))){
+				    			localRemplisseur.AjouterSwitch(switchR);
+				    		}
+			    		}
+			    	}
 			    }
 			    
 			    /** Ajoute récursivement les Salles/Ordianteurs/Cartes réseaux et les Switchs potentiels**/
@@ -284,7 +298,7 @@ public class Gestion_base_de_donnee {
 			    for(j = 0; j < nombreSalles; j++){
 			    	resultSetSalle.next();
 			    	
-			    	Salle salleRemplisseur = new Salle(resultSetSalle.getString("nom_salle"));
+			    	Salle salleRemplisseur = new Salle(resultSetSalle.getString("nom_salle"), resultSetSalle.getBoolean("statut"));
 			    	
 			    	/** Ajoute les Routeurs à la salle **/
 			    	
@@ -301,7 +315,12 @@ public class Gestion_base_de_donnee {
 				    for(k = 0; k < nombreRouteurs; k++){
 				    	resultSetRouteur.next();
 				    	
-				    	salleRemplisseur.AjouterRouteur(resultSetSwitch.getString("nom_routeur"));
+				    	/** Populate le réseau physique avec le réseau logique **/
+				    	for(int a = 0; a < reseauLogique.size(); a++){
+				    		if(reseauLogique.get(a).getNomRouteur().equals((resultSetRouteur).getString("nom_routeur"))){
+				    			salleRemplisseur.AjouterRouteur(reseauLogique.get(a));
+				    		}
+				    	}
 				    }
 				    	
 				    /**Ajoute les Switchs à la salle **/
@@ -318,7 +337,18 @@ public class Gestion_base_de_donnee {
 				    for(k = 0; k < nombreSwitchs; k++){
 				    	resultSetSwitch.next();
 				    	
-				    	salleRemplisseur.AjouterSwitch(resultSetSwitch.getString("nom_switch"));
+						/** Ajoute les switchs précédemment crée dans le réseau logique **/
+					    for(j = 0; j < nombreSwitchs; j++){
+					    	resultSetSwitch.next();
+					    	
+					    	for(int a = 0; a < reseauLogique.size(); a++){
+					    		for(Switch switchR : reseauLogique.get(a).getListeSwitch()){
+					    			if(switchR.getNomSwitch().equals((resultSetSwitch).getString("nom_switch"))){
+						    			salleRemplisseur.AjouterSwitch(switchR);
+						    		}
+					    		}
+					    	}
+					    }
 				    }
 			    	
 				    /** Ajoute les Ordinateurs aux salles **/
@@ -334,7 +364,7 @@ public class Gestion_base_de_donnee {
 				    for(l = 0; l < nombreOrdinateurs; l++){
 				    	resultSetOrdinateur.next();
 				    	
-				    	Ordinateur ordinateurRemplisseur = new Ordinateur(resultSetOrdinateur.getString("nom_ordinateur"));
+				    	Ordinateur ordinateurRemplisseur = new Ordinateur(resultSetOrdinateur.getString("nom_ordinateur"), resultSetOrdinateur.getBoolean("statut"));
 				    	
 				    	/** Ajoute les Cartes réseau à l'ordinateur **/
 				    	
@@ -350,7 +380,7 @@ public class Gestion_base_de_donnee {
 				    		resultSetCarteReseau.next();
 				    		
 				    		//crée la carte réseau
-				    		CarteReseau carteReseauRemplisseur = new CarteReseau(resultSetCarteReseau.getString("adresse_mac"));
+				    		CarteReseau carteReseauRemplisseur = new CarteReseau(resultSetCarteReseau.getString("adresse_mac"), resultSetCarteReseau.getBoolean("statut"));
 				    		//ajoute la carte réseau à l'ordinateur
 				    		ordinateurRemplisseur.AjouterCarteReseau(carteReseauRemplisseur);
 				    	}

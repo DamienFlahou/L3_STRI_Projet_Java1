@@ -1,3 +1,4 @@
+package Controleur;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import Model.CarteReseau;
+import Model.Local;
+import Model.Ordinateur;
+import Model.Routeur;
+import Model.Salle;
+import Model.Switch;
+import Vue.ApplicationWindows;
 
 
 public class ControleurSelectionListe implements MouseListener{
@@ -83,7 +92,16 @@ public class ControleurSelectionListe implements MouseListener{
 					}
 					
 				}
-			
+				
+				//Gère les boutons activer et désactiver
+				if(local.isActive()){
+					fenetre.getBtnActiver().setEnabled(false);
+					fenetre.getBtnDsactiver().setEnabled(true);
+				}
+				else{
+					fenetre.getBtnActiver().setEnabled(true);
+					fenetre.getBtnDsactiver().setEnabled(false);
+				}
 			break;
 		case SSalle :
 				
@@ -102,7 +120,16 @@ public class ControleurSelectionListe implements MouseListener{
 						fenetre.getListeCarteReseaux().addElement(carte);
 					}
 				}
-			
+				
+				if(salle.isActive()){
+					fenetre.getBtnActiver().setEnabled(false);
+					fenetre.getBtnDsactiver().setEnabled(true);
+				}
+				else{
+					fenetre.getBtnActiver().setEnabled(true);
+					fenetre.getBtnDsactiver().setEnabled(false);
+				}
+				
 			break;
 		case SOrdinateurPhysique :
 					
@@ -117,9 +144,30 @@ public class ControleurSelectionListe implements MouseListener{
 					fenetre.getListeCarteReseaux().addElement(carte);
 				}
 			
+				if(ordinateur.isActive()){
+					fenetre.getBtnActiver().setEnabled(false);
+					fenetre.getBtnDsactiver().setEnabled(true);
+				}
+				else{
+					fenetre.getBtnActiver().setEnabled(true);
+					fenetre.getBtnDsactiver().setEnabled(false);
+				}
+				
 			break;
 		case SCarteReseauPhysique :
 			changerBoutonsPhysique("Carte Res");
+			
+			CarteReseau carte = (CarteReseau) fenetre.getListeCarteReseaux().get(fenetre.getList_cartes_reseaux().getSelectedIndex());
+			
+			if(carte.isActive()){
+				fenetre.getBtnActiver().setEnabled(false);
+				fenetre.getBtnDsactiver().setEnabled(true);
+			}
+			else{
+				fenetre.getBtnActiver().setEnabled(true);
+				fenetre.getBtnDsactiver().setEnabled(false);
+			}
+			
 			break;
 		case SRouteur :
 				changerBoutonsLogique("Routeur");
@@ -137,11 +185,20 @@ public class ControleurSelectionListe implements MouseListener{
 					for(Ordinateur ordinateur0 : switchR.getListeOrdinateur()){
 						fenetre.getListeOrdinateurs2().addElement(ordinateur0);
 						
-						for(CarteReseau carte : ordinateur0.getListeCarteReseau()){
-							fenetre.getListeCarteReseaux2().addElement(carte);
+						for(CarteReseau carteR : ordinateur0.getListeCarteReseau()){
+							fenetre.getListeCarteReseaux2().addElement(carteR);
 						}
 					}
 					
+				}
+				
+				if(routeur.isActive()){
+					fenetre.getBtnActiver_1().setEnabled(false);
+					fenetre.getBtnDsactiver_1().setEnabled(true);
+				}
+				else{
+					fenetre.getBtnActiver_1().setEnabled(true);
+					fenetre.getBtnDsactiver_1().setEnabled(false);
 				}
 			
 			break;
@@ -157,9 +214,18 @@ public class ControleurSelectionListe implements MouseListener{
 				for(Ordinateur ordinateur1 : switchR.getListeOrdinateur()){
 					fenetre.getListeOrdinateurs2().addElement(ordinateur1);
 					
-					for(CarteReseau carte : ordinateur1.getListeCarteReseau()){
-						fenetre.getListeCarteReseaux2().addElement(carte);
+					for(CarteReseau carte1 : ordinateur1.getListeCarteReseau()){
+						fenetre.getListeCarteReseaux2().addElement(carte1);
 					}
+				}
+				
+				if(switchR.isActive()){
+					fenetre.getBtnActiver_1().setEnabled(false);
+					fenetre.getBtnDsactiver_1().setEnabled(true);
+				}
+				else{
+					fenetre.getBtnActiver_1().setEnabled(true);
+					fenetre.getBtnDsactiver_1().setEnabled(false);
 				}
 			
 			break;
@@ -171,17 +237,37 @@ public class ControleurSelectionListe implements MouseListener{
 				
 				fenetre.getListeCarteReseaux2().clear();
 				
-				for(CarteReseau carte : ordinateur2.getListeCarteReseau()){
-					fenetre.getListeCarteReseaux2().addElement(carte);
+				for(CarteReseau carte2 : ordinateur2.getListeCarteReseau()){
+					fenetre.getListeCarteReseaux2().addElement(carte2);
+				}
+				
+				if(ordinateur2.isActive()){
+					fenetre.getBtnActiver_1().setEnabled(false);
+					fenetre.getBtnDsactiver_1().setEnabled(true);
+				}
+				else{
+					fenetre.getBtnActiver_1().setEnabled(true);
+					fenetre.getBtnDsactiver_1().setEnabled(false);
 				}
 			
 			break;
 		case SCarteReseauLogique :
 			changerBoutonsLogique("Carte Res");
+			
+			CarteReseau carte3 = (CarteReseau) fenetre.getListeCarteReseaux2().get(fenetre.getList_cartes_reseaux_logique().getSelectedIndex());
+			
+			if(carte3.isActive()){
+				fenetre.getBtnActiver_1().setEnabled(false);
+				fenetre.getBtnDsactiver_1().setEnabled(true);
+			}
+			else{
+				fenetre.getBtnActiver_1().setEnabled(true);
+				fenetre.getBtnDsactiver_1().setEnabled(false);
+			}
+			
 			break;
 			
 		}
-		
 	}
 
 	@Override

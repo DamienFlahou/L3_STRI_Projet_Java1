@@ -1,3 +1,4 @@
+package Controleur;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,14 +9,17 @@ import javax.swing.DefaultListModel;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 
+import Model.Local;
+import Vue.AjouterLocal;
+
 
 public class ControleurAjouterLocal implements MouseListener{
 
 	private AjouterLocal fenetre;
 	private int numeroBouton;
 	
-	private static final int BValider = 2;
-	private static final int BAnnuler = 3;
+	private static final int BValider = 1;
+	private static final int BAnnuler = 2;
 	
 	public ControleurAjouterLocal(AjouterLocal _fenetre, int _numeroBouton) {
 		fenetre = _fenetre;
@@ -54,7 +58,9 @@ public class ControleurAjouterLocal implements MouseListener{
 					fenetre.getTextField_nom().setBorder(border);
 				}
 				else{
-					fenetre.getApplicationPrincipale().getListeLocaux().addElement(new Local(texte));
+					fenetre.getApplicationPrincipale().getReseauPhysique().add(new Local(texte, true));
+					//Met à jour les listes
+					fenetre.getApplicationPrincipale().miseAJourListes();
 					fenetre.setVisible(false);
 					fenetre.dispose();
 				}

@@ -1,16 +1,14 @@
-import java.awt.Color;
-import java.awt.EventQueue;
+package Vue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.border.Border;
+
+import Controleur.ControleurAjouterLocal;
 
 
 public class AjouterLocal extends JFrame implements MouseListener{
@@ -20,8 +18,8 @@ public class AjouterLocal extends JFrame implements MouseListener{
 	private JButton btnValider;
 	private JButton btnAnnuler;
 	
-	private static final int BValider = 2;
-	private static final int BAnnuler = 3;
+	private static final int BValider = 1;
+	private static final int BAnnuler = 2;
 	
 	private ApplicationWindows applicationPrincipale;
 	
@@ -77,7 +75,6 @@ public class AjouterLocal extends JFrame implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
 		
 	}
 

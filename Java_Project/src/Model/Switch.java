@@ -1,3 +1,4 @@
+package Model;
 import java.util.ArrayList;
 
 
@@ -6,17 +7,20 @@ public class Switch {
 	private ArrayList<Salle> listeSalle = new ArrayList<Salle>();
 	private ArrayList<Ordinateur> listeOrdinateur = new ArrayList<Ordinateur>();
 	
-	public Switch(String nomSwitch) {
+	private boolean isActive;
+	
+	public Switch(String nomSwitch, boolean _isActive) {
 		super();
+		this.isActive = _isActive;
 		this.nomSwitch = nomSwitch;
 	}
 
 	public void AjouterSalle(String nomSalle) {
-		this.listeSalle.add(new Salle(nomSalle));
+		this.listeSalle.add(new Salle(nomSalle, true));
 	}
 	
 	public void AjouterOrdinateur(String nomOrdinateur) {
-		this.listeOrdinateur.add(new Ordinateur(nomOrdinateur));
+		this.listeOrdinateur.add(new Ordinateur(nomOrdinateur, true));
 	}
 	
 	public void AjouterOrdinateur(Ordinateur ordinateur) {
@@ -49,5 +53,33 @@ public class Switch {
 	
 	public String toString(){
 		return nomSwitch;
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	public void Desactiver(){
+		for(Ordinateur ordinateur : listeOrdinateur){
+			ordinateur.Desactiver();
+		}
+		for(Salle salle : listeSalle){
+			salle.Desactiver();
+		}
+		this.setActive(false);
+	}
+	
+	public void Activer(){
+		for(Ordinateur ordinateur : listeOrdinateur){
+			ordinateur.Activer();
+		}
+		for(Salle salle : listeSalle){
+			salle.Activer();
+		}
+		this.setActive(true);
 	}
 }

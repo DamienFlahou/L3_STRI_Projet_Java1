@@ -1,17 +1,20 @@
+package Model;
 import java.util.ArrayList;
 
 public class Ordinateur {
 
 	private String nomOrdinateur;
 	private ArrayList<CarteReseau> listeCarteReseau = new ArrayList<CarteReseau>(); 
+	private boolean isActive;
 	
-	public Ordinateur(String nomOrdinateur) {
+	public Ordinateur(String nomOrdinateur, boolean _isActive) {
 		super();
 		this.nomOrdinateur = nomOrdinateur;
+		this.isActive = _isActive;
 	}
 	
 	public void AjouterCarteReseau(String adresseMac) {
-		this.listeCarteReseau.add(new CarteReseau(adresseMac));
+		this.listeCarteReseau.add(new CarteReseau(adresseMac, true));
 	}
 	
 	public void AjouterCarteReseau(CarteReseau carteReseau) {
@@ -38,4 +41,25 @@ public class Ordinateur {
 		return nomOrdinateur;
 	}
 	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	public void Desactiver(){
+		for(CarteReseau carte : listeCarteReseau){
+			carte.setActive(false);
+		}
+		this.setActive(false);
+	}
+	
+	public void Activer(){
+		for(CarteReseau carte : listeCarteReseau){
+			carte.setActive(true);
+		}
+		this.setActive(true);
+	}
 }
