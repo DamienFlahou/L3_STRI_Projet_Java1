@@ -1,10 +1,8 @@
 package Vue;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +11,6 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-import Controleur.ControleurAjouterLocal;
 import Controleur.ControleurAjouterSalle;
 import Model.Local;
 import Model.Routeur;

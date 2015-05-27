@@ -1,28 +1,36 @@
 package Vue;
 
-import java.awt.EventQueue;
-
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JButton;
+
+import Controleur.ControleurAjouterRouteur;
+
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 
 public class AjouterRouteur extends JFrame{
 
 	private JTextField textField;
-
+	private ApplicationWindows fenetre;
+	
+	private DefaultListModel listeRouteur = new DefaultListModel();
+	
+	private static final int BValider = 1;
+	private static final int BAnnuler = 2;
+	
+	private JComboBox comboBox;
 
 	/**
 	 * Create the application.
 	 */
-	public AjouterRouteur() {
+	public AjouterRouteur(ApplicationWindows fenetre) {
+		this.fenetre = fenetre;
+		listeRouteur = fenetre.getListeLocaux();
 		initialize();
 	}
 
@@ -31,9 +39,10 @@ public class AjouterRouteur extends JFrame{
 	 */
 	private void initialize() {
 	
-		this.setBounds(100, 100, 467, 300);
+		this.setBounds(100, 100, 459, 179);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(null);
+		this.setLocationRelativeTo(fenetre);
 		
 		JLabel lblNom = new JLabel("Nom");
 		lblNom.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -48,46 +57,38 @@ public class AjouterRouteur extends JFrame{
 		lblLocal.setBounds(22, 60, 70, 14);
 		this.getContentPane().add(lblLocal);
 		
-		JLabel lblSalle = new JLabel("Salle");
-		lblSalle.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblSalle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSalle.setBounds(22, 85, 70, 14);
-		this.getContentPane().add(lblSalle);
-		
 		textField = new JTextField();
 		textField.setBounds(102, 33, 229, 17);
 		this.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox(listeRouteur.toArray());
 		comboBox.setBounds(102, 57, 229, 20);
 		this.getContentPane().add(comboBox);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(102, 82, 229, 20);
-		this.getContentPane().add(comboBox_1);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(102, 107, 229, 20);
-		this.getContentPane().add(comboBox_2);
-		
-		JList list = new JList();
-		list.setBounds(99, 147, 229, 68);
-		this.getContentPane().add(list);
-		
 		JButton btnValider = new JButton("Valider");
 		btnValider.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnValider.setBounds(352, 227, 89, 23);
+		btnValider.setBounds(343, 102, 89, 23);
 		this.getContentPane().add(btnValider);
 		
 		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnAnnuler.setBounds(260, 227, 89, 23);
+		btnAnnuler.setBounds(251, 102, 89, 23);
 		this.getContentPane().add(btnAnnuler);
 		
+		btnValider.addMouseListener(new ControleurAjouterRouteur(this, BValider));
+		btnAnnuler.addMouseListener(new ControleurAjouterRouteur(this, BAnnuler));
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public ApplicationWindows getFenetre() {
+		return fenetre;
+	}
+
+	public JComboBox getComboBox() {
+		return comboBox;
 	}
 }

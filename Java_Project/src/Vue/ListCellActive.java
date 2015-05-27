@@ -36,10 +36,7 @@ public class ListCellActive extends JLabel implements ListCellRenderer {
     
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        // Assumes the stuff in the list has a pretty toString
         setText(value.toString());
-
-        // based on the index you set the color.  This produces the every other effect.
         
         switch(numeroListe){
         case SLocal:

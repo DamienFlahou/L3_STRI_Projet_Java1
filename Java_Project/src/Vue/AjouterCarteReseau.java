@@ -1,6 +1,7 @@
 package Vue;
 
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -10,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+import Controleur.ControleurAjouterCarteReseau;
 import Controleur.JTextFieldLimit;
 import Model.Ordinateur;
 import Model.Routeur;
@@ -157,6 +159,24 @@ public class AjouterCarteReseau extends JFrame{
 		comboBox_Routeur.setBounds(151, 118, 221, 20);
 		this.getContentPane().add(comboBox_Routeur);
 		
+		comboBox_Routeur.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		        if(comboBox_Routeur.getSelectedIndex() > 0){
+		        	comboBox_Ordinateur.setSelectedIndex(0);
+		        }
+		    }
+		});
+		
+		comboBox_Ordinateur.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		        if(comboBox_Ordinateur.getSelectedIndex() > 0){
+		        	comboBox_Routeur.setSelectedIndex(0);
+		        }
+		    }
+		});
+		
 		JButton btnValider = new JButton("Valider");
 		btnValider.setBounds(302, 207, 89, 23);
 		this.getContentPane().add(btnValider);
@@ -164,6 +184,9 @@ public class AjouterCarteReseau extends JFrame{
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setBounds(184, 207, 89, 23);
 		this.getContentPane().add(btnAnnuler);
+		
+		btnValider.addMouseListener(new ControleurAjouterCarteReseau(this, BValider));
+		btnAnnuler.addMouseListener(new ControleurAjouterCarteReseau(this, BAnnuler));
 	}
 
 	public JTextField getTextField_mac1() {

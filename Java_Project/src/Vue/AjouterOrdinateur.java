@@ -1,7 +1,5 @@
 package Vue;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -11,7 +9,6 @@ import javax.swing.JList;
 import javax.swing.JButton;
 
 import Controleur.ControleurAjouterOrdinateur;
-import Controleur.ControleurAjouterSalle;
 import Model.Local;
 import Model.Routeur;
 import Model.Salle;
@@ -110,11 +107,11 @@ public class AjouterOrdinateur extends JFrame{
 		comboBox.setBounds(102, 57, 229, 20);
 		this.getContentPane().add(comboBox);
 		
-		comboBox_1 = new JComboBox(listeSwitch.toArray());
+		comboBox_1 = new JComboBox(listeSalle.toArray());
 		comboBox_1.setBounds(102, 82, 229, 20);
 		this.getContentPane().add(comboBox_1);
 		
-		comboBox_2 = new JComboBox(listeSalle.toArray());
+		comboBox_2 = new JComboBox(listeSwitch.toArray());
 		comboBox_2.setBounds(102, 107, 229, 20);
 		this.getContentPane().add(comboBox_2);
 		

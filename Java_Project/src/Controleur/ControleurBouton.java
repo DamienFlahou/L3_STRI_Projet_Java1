@@ -14,6 +14,7 @@ import Model.Switch;
 import Vue.AjouterCarteReseau;
 import Vue.AjouterLocal;
 import Vue.AjouterOrdinateur;
+import Vue.AjouterRouteur;
 import Vue.AjouterSalle;
 import Vue.ApplicationWindows;
 
@@ -74,18 +75,6 @@ public class ControleurBouton implements MouseListener{
 			case SCarteReseauPhysique:
 				AjouterCarteReseau carteWindow = new AjouterCarteReseau(fenetre);
 				carteWindow.setVisible(true);
-				break;
-			case SRouteur:
-				
-				break;
-			case SSwitch:
-				
-				break;
-			case SOrdinateurLogique:
-				
-				break;
-			case SCarteReseauLogique:
-				
 				break;
 			}
 			
@@ -343,29 +332,20 @@ public class ControleurBouton implements MouseListener{
 			break;
 		case SBoutonAjouter_1:
 			switch(fenetre.getFocusList()){
-			case SLocal:
-				
-				break;
-			case SSalle:
-				
-				break;
-			case SOrdinateurPhysique:
-				
-				break;
-			case SCarteReseauPhysique:
-				
-				break;
 			case SRouteur:
-				
+				AjouterRouteur routeurWindow = new AjouterRouteur(fenetre);
+				routeurWindow.setVisible(true);
 				break;
 			case SSwitch:
 				
 				break;
 			case SOrdinateurLogique:
-				
+				AjouterOrdinateur ordinateurWindow = new AjouterOrdinateur(fenetre);
+				ordinateurWindow.setVisible(true);
 				break;
 			case SCarteReseauLogique:
-				
+				AjouterCarteReseau carteWindow = new AjouterCarteReseau(fenetre);
+				carteWindow.setVisible(true);
 				break;
 			}
 			
