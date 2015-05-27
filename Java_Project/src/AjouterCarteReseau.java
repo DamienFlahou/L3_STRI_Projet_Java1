@@ -52,45 +52,48 @@ public class AjouterCarteReseau extends JFrame{
 		
 		
 		textField_mac1 = new JTextField();
-		textField_mac1.setBounds(151, 34, 161, 20);
+		textField_mac1.setBounds(151, 34, 171, 20);
 		this.getContentPane().add(textField_mac1);
-		textField_mac1.setColumns(10);
+		textField_mac1.setSize(20, 20);
 		
 		lblDeuxPoints1 = new JLabel(":");
-		lblDeuxPoints1.setBounds(162, 34, 170, 20);
+		lblDeuxPoints1.setBounds(175, 34, 179, 20);
 		this.getContentPane().add(lblDeuxPoints1);
 		
 		textField_mac2 = new JTextField();
-		textField_mac2.setBounds(171, 34, 181, 20);
+		textField_mac2.setBounds(180, 34, 200, 20);
 		this.getContentPane().add(textField_mac2);
-		textField_mac2.setColumns(10);
+		textField_mac2.setSize(20, 20);
 		
 		lblDeuxPoints2 = new JLabel(":");
-		lblDeuxPoints2.setBounds(182, 34, 190, 20);
+		lblDeuxPoints2.setBounds(204, 34, 208, 20);
 		this.getContentPane().add(lblDeuxPoints2);
 		
 		textField_mac3 = new JTextField();
-		textField_mac3.setBounds(191, 34, 201, 20);
+		textField_mac3.setBounds(209, 34, 229, 20);
 		this.getContentPane().add(textField_mac3);
 		textField_mac3.setColumns(10);
+		textField_mac3.setSize(20, 20);
 		
 		lblDeuxPoints3 = new JLabel(":");
-		lblDeuxPoints3.setBounds(202, 34, 210, 31);
+		lblDeuxPoints3.setBounds(233, 34, 237, 20);
 		this.getContentPane().add(lblDeuxPoints3);
 		
 		textField_mac4 = new JTextField();
-		textField_mac4.setBounds(211, 34, 221, 20);
+		textField_mac4.setBounds(238, 34, 258, 20);
 		this.getContentPane().add(textField_mac4);
 		textField_mac4.setColumns(10);
+		textField_mac4.setSize(20, 20);
 		
 		lblDeuxPoints4 = new JLabel(":");
-		lblDeuxPoints4.setBounds(212, 34, 220, 20);
+		lblDeuxPoints4.setBounds(262, 34, 266, 20);
 		this.getContentPane().add(lblDeuxPoints4);
 		
 		textField_mac5 = new JTextField();
-		textField_mac5.setBounds(221, 34, 231, 20);
+		textField_mac5.setBounds(267, 34, 277, 20);
 		this.getContentPane().add(textField_mac5);
 		textField_mac5.setColumns(10);
+		textField_mac5.setSize(20, 20);
 		
 
 		
